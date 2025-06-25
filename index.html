@@ -280,8 +280,8 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>Leading and Managing Individuals and Teams</h1>
-            <p>Discover and explore xxxxxxx</p>
+            <h1>Learning Topic Explorer</h1>
+            <p>Discover and explore learning paths tailored to your interests</p>
         </div>
 
         <div class="diagram-container">
@@ -307,31 +307,31 @@
         // Topic data - customize this to match your LXP content
         const topicsData = [
             {
-                id: 'collaboration',
-                title: 'Collaboration',
+                id: 'leadership',
+                title: 'Leadership Skills',
                 description: 'Develop essential leadership competencies and management techniques',
-                icon: '<img src="LMIT icon collaboration.png" alt="Leadership" style="width: 40px; height: 40px;">',
+                icon: '👑',
                 subtopics: [
                     {
-                        title: 'Skill 1',
+                        title: 'Strategic Thinking',
                         description: 'Learn to think strategically and make informed decisions',
                         icon: '🎯',
-                        url: 'https://thelearningarena.streamlxp.com/courses/athlete-health/home'
+                        url: 'https://your-lxp.com/leadership/strategic-thinking'
                     },
                     {
-                        title: 'Skill 2',
+                        title: 'Team Management',
                         description: 'Master the art of leading and motivating teams',
                         icon: '👥',
-                        url: 'https://thelearningarena.streamlxp.com/courses/832/home'
+                        url: 'https://your-lxp.com/leadership/team-management'
                     },
                     {
-                        title: 'Skill 3',
+                        title: 'Communication Skills',
                         description: 'Enhance your verbal and written communication abilities',
                         icon: '💬',
                         url: 'https://your-lxp.com/leadership/communication'
                     },
                     {
-                        title: 'Skill 4',
+                        title: 'Conflict Resolution',
                         description: 'Learn techniques for resolving workplace conflicts',
                         icon: '🤝',
                         url: 'https://your-lxp.com/leadership/conflict-resolution'
@@ -339,8 +339,8 @@
                 ]
             },
             {
-                id: 'Motivation',
-                title: 'Motivation',
+                id: 'technology',
+                title: 'Digital Technology',
                 description: 'Stay current with the latest technological trends and tools',
                 icon: '💻',
                 subtopics: [
@@ -371,8 +371,8 @@
                 ]
             },
             {
-                id: 'Leading Change',
-                title: 'Leading Change',
+                id: 'communication',
+                title: 'Professional Communication',
                 description: 'Enhance your professional communication and presentation skills',
                 icon: '🎤',
                 subtopics: [
@@ -403,8 +403,8 @@
                 ]
             },
             {
-                id: 'Support and Feedback',
-                title: 'Support and Feedback',
+                id: 'project-management',
+                title: 'Project Management',
                 description: 'Learn methodologies and tools for successful project delivery',
                 icon: '📋',
                 subtopics: [
@@ -435,31 +435,31 @@
                 ]
             },
             {
-                id: 'Objective Setting',
-                title: 'Objective Setting',
+                id: 'personal-development',
+                title: 'Personal Development',
                 description: 'Grow personally and professionally with self-improvement skills',
                 icon: '🌱',
                 subtopics: [
                     {
-                        title: 'Skill 1',
+                        title: 'Time Management',
                         description: 'Optimize your productivity and time allocation',
                         icon: '⏰',
                         url: 'https://your-lxp.com/personal/time-management'
                     },
                     {
-                        title: 'Skill 2',
+                        title: 'Emotional Intelligence',
                         description: 'Develop awareness and management of emotions',
                         icon: '❤️',
                         url: 'https://your-lxp.com/personal/emotional-intelligence'
                     },
                     {
-                        title: 'Skill 3',
+                        title: 'Critical Thinking',
                         description: 'Enhance your analytical and problem-solving skills',
                         icon: '🧠',
                         url: 'https://your-lxp.com/personal/critical-thinking'
                     },
                     {
-                        title: 'Skill 4',
+                        title: 'Stress Management',
                         description: 'Learn techniques for managing workplace stress',
                         icon: '🧘',
                         url: 'https://your-lxp.com/personal/stress-management'
@@ -467,69 +467,37 @@
                 ]
             },
             {
-                id: 'Supporting Learning',
-                title: 'Supporting Learning',
+                id: 'finance',
+                title: 'Financial Literacy',
                 description: 'Build understanding of financial principles and business acumen',
                 icon: '💰',
                 subtopics: [
                     {
-                        title: 'Skill 1',
+                        title: 'Budgeting & Planning',
                         description: 'Master financial planning and budget management',
                         icon: '📈',
                         url: 'https://your-lxp.com/finance/budgeting'
                     },
                     {
-                        title: 'Skill 2',
+                        title: 'Investment Basics',
                         description: 'Understanding investment principles and strategies',
                         icon: '📊',
                         url: 'https://your-lxp.com/finance/investments'
                     },
                     {
-                        title: 'Skill 3',
+                        title: 'Financial Analysis',
                         description: 'Learn to analyze financial statements and metrics',
                         icon: '🔍',
                         url: 'https://your-lxp.com/finance/analysis'
                     },
                     {
-                        title: 'Skill 4',
+                        title: 'Risk Assessment',
                         description: 'Evaluate and manage financial risks effectively',
                         icon: '⚖️',
                         url: 'https://your-lxp.com/finance/risk-assessment'
                     }
                 ]
-            },
-              {
-                id: 'Understanding Individuals',
-                title: 'Understanding Individuals',
-                description: 'Grow personally and professionally with self-improvement skills',
-                icon: '🌱',
-                subtopics: [
-                    {
-                        title: 'Skill 1',
-                        description: 'Optimize your productivity and time allocation',
-                        icon: '⏰',
-                        url: 'https://your-lxp.com/personal/time-management'
-                    },
-                    {
-                        title: 'Skill 2',
-                        description: 'Develop awareness and management of emotions',
-                        icon: '❤️',
-                        url: 'https://your-lxp.com/personal/emotional-intelligence'
-                    },
-                    {
-                        title: 'Skill 3',
-                        description: 'Enhance your analytical and problem-solving skills',
-                        icon: '🧠',
-                        url: 'https://your-lxp.com/personal/critical-thinking'
-                    },
-                    {
-                        title: 'Skill 4',
-                        description: 'Learn techniques for managing workplace stress',
-                        icon: '🧘',
-                        url: 'https://your-lxp.com/personal/stress-management'
-                    }
-                ]
-            },
+            }
         ];
 
         // Generate topic cards
@@ -564,6 +532,7 @@
                 const subtopicItem = document.createElement('a');
                 subtopicItem.className = 'subtopic-item';
                 subtopicItem.href = subtopic.url;
+                subtopicItem.target = '_parent';
                 subtopicItem.innerHTML = `
                     <div class="subtopic-icon">${subtopic.icon}</div>
                     <div class="subtopic-content">

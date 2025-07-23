@@ -3,575 +3,343 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LXP Topic Explorer</title>
+    <title>Interactive Agile Leadership Skills</title>
     <style>
-        :root {
-            --primary-color: #103F6B;
-            --secondary-color: #0d3454;
-            --accent-color: #f59e0b;
-            --background-color: #f8fafc;
-            --card-background: #ffffff;
-            --text-primary: #103F6B;
-            --text-secondary: #6b7280;
-            --border-color: #e5e7eb;
-            --hover-color: #f0f6ff;
-            --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: var(--font-family);
-            background: linear-gradient(135deg, var(--background-color) 0%, #e2e8f0 100%);
-            min-height: 100vh;
-            color: var(--text-primary);
+            font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            margin: 0;
+            padding: 20px;
+            color: #103F6B;
         }
-
+        
         .container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-        }
-
-        .diagram-container {
-            background: var(--card-background);
-            border-radius: 16px;
-            padding: 3rem;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
-            border: 1px solid var(--border-color);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .topics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            position: relative;
-        }
-
-        .topic-card {
             background: white;
             border-radius: 16px;
-            padding: 2rem;
-            color: var(--text-primary);
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .diagram-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .diagram-image {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 12px;
+        }
+        
+        .skill-overlay {
+            position: absolute;
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(16, 63, 107, 0.1);
-            border: 1px solid rgba(16, 63, 107, 0.08);
+            border-radius: 8px;
         }
-
-        .topic-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, rgba(16, 63, 107, 0.05), rgba(16, 63, 107, 0.02));
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        
+        .skill-overlay:hover {
+            background: rgba(16, 63, 107, 0.15);
+            transform: scale(1.03);
+            box-shadow: 0 4px 12px rgba(16, 63, 107, 0.2);
         }
-
-        .topic-card:hover {
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 12px 30px rgba(16, 63, 107, 0.15);
-            border-color: rgba(16, 63, 107, 0.2);
-        }
-
-        .topic-card:hover::before {
-            opacity: 1;
-        }
-
-        .topic-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .topic-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
-        .topic-description {
-            font-size: 0.95rem;
-            opacity: 0.8;
-            line-height: 1.5;
-            color: var(--text-primary);
-        }
-
-        .modal-overlay {
+        
+        /* Left side skills */
+        .understanding-individuals { top: 18%; left: 2%; width: 18%; height: 6%; }
+        .team-vision { top: 32%; left: 2%; width: 18%; height: 6%; }
+        .collaboration { top: 46%; left: 2%; width: 18%; height: 6%; }
+        .leading-change { top: 60%; left: 2%; width: 18%; height: 6%; }
+        .support-feedback { top: 74%; left: 2%; width: 18%; height: 6%; }
+        
+        /* Right side skills */
+        .objective-setting { top: 18%; right: 2%; width: 18%; height: 6%; }
+        .supporting-learning { top: 32%; right: 2%; width: 18%; height: 6%; }
+        .managing-projects { top: 46%; right: 2%; width: 18%; height: 6%; }
+        .thriving-environment { top: 60%; right: 2%; width: 18%; height: 6%; }
+        .decision-making { top: 74%; right: 2%; width: 18%; height: 6%; }
+        
+        /* Core leadership skills around center */
+        .mentor { top: 22%; left: 27%; width: 16%; height: 8%; }
+        .delegate { top: 22%; right: 27%; width: 16%; height: 8%; }
+        .direct { top: 62%; left: 27%; width: 16%; height: 8%; }
+        .coach { top: 62%; right: 27%; width: 16%; height: 8%; }
+        
+        /* Assessment button */
+        .assessment { bottom: 8%; left: 41%; width: 18%; height: 5%; }
+        
+        .modal {
+            display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.5);
             backdrop-filter: blur(4px);
-            display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
         }
-
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
+        
+        .modal.show { 
+            display: flex; 
         }
-
-        .modal {
-            background: var(--card-background);
+        
+        .modal-content {
+            background: white;
             border-radius: 20px;
-            padding: 2.5rem;
+            padding: 30px;
             max-width: 600px;
             width: 90%;
             max-height: 80vh;
             overflow-y: auto;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-            transform: scale(0.9) translateY(20px);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-
-        .modal-overlay.active .modal {
-            transform: scale(1) translateY(0);
-        }
-
+        
         .modal-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #e5e7eb;
         }
-
+        
         .modal-title {
             font-size: 1.8rem;
             font-weight: 700;
-            color: var(--primary-color);
+            color: #103F6B;
         }
-
-        .close-button {
+        
+        .close-btn {
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 24px;
             cursor: pointer;
-            color: var(--text-secondary);
-            padding: 0.5rem;
-            border-radius: 8px;
-            transition: all 0.3s ease;
+            color: #6b7280;
+            padding: 8px;
+            border-radius: 4px;
+            transition: background 0.2s ease;
         }
-
-        .close-button:hover {
-            background: var(--hover-color);
-            color: var(--primary-color);
+        
+        .close-btn:hover {
+            background: #f3f4f6;
         }
-
-        .subtopics-list {
+        
+        .modal-description {
+            margin-bottom: 25px;
+            line-height: 1.6;
+            color: #4b5563;
+            font-size: 1rem;
+        }
+        
+        .action-buttons {
             display: grid;
-            gap: 1rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
         }
-
-        .subtopic-item {
-            display: flex;
-            align-items: center;
-            padding: 1.5rem;
-            background: var(--hover-color);
-            border-radius: 12px;
-            text-decoration: none;
-            color: var(--text-primary);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-
-        .subtopic-item:hover {
-            background: var(--primary-color);
+        
+        .action-btn {
+            padding: 12px 20px;
+            background: #103F6B;
             color: white;
-            transform: translateX(8px);
-            border-color: var(--secondary-color);
-        }
-
-        .subtopic-icon {
-            font-size: 1.5rem;
-            margin-right: 1rem;
-            transition: transform 0.3s ease;
-        }
-
-        .subtopic-item:hover .subtopic-icon {
-            transform: scale(1.1);
-        }
-
-        .subtopic-content {
-            flex: 1;
-        }
-
-        .subtopic-title {
-            font-size: 1.1rem;
+            text-decoration: none;
+            border-radius: 8px;
+            text-align: center;
             font-weight: 600;
-            margin-bottom: 0.25rem;
+            transition: all 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
         }
-
-        .subtopic-description {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        
+        .action-btn:hover {
+            background: #0d3454;
+            transform: translateY(-1px);
         }
-
-        .arrow-icon {
-            font-size: 1.2rem;
-            transition: transform 0.3s ease;
-        }
-
-        .subtopic-item:hover .arrow-icon {
-            transform: translateX(4px);
-        }
-
+        
         @media (max-width: 768px) {
-            .container {
-                padding: 1rem;
+            .skill-overlay {
+                border: 1px solid rgba(16, 63, 107, 0.3);
+                background: rgba(16, 63, 107, 0.05);
             }
-
-            .header h1 {
-                font-size: 2rem;
-            }
-
-            .topics-grid {
+            
+            .action-buttons {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-
-            .topic-card {
-                padding: 1.5rem;
-            }
-
-            .modal {
-                padding: 2rem;
-                margin: 1rem;
+                gap: 10px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>Learning Topic Explorer</h1>
-            <p>Discover and explore learning paths tailored to your interests</p>
-        </div>
-
         <div class="diagram-container">
-            <div class="topics-grid" id="topicsGrid">
-                <!-- Topics will be generated here -->
-            </div>
+            <!-- Your diagram image -->
+            <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAFUAVQDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD" 
+                 alt="Agile Leadership Skills Diagram" 
+                 class="diagram-image" />
+            
+            <!-- Clickable overlay areas positioned over your buttons -->
+            <!-- Left side skills -->
+            <div class="skill-overlay understanding-individuals" onclick="openModal('understanding_individuals')" title="Understanding Individuals"></div>
+            <div class="skill-overlay team-vision" onclick="openModal('team_vision')" title="Team Vision"></div>
+            <div class="skill-overlay collaboration" onclick="openModal('collaboration')" title="Collaboration"></div>
+            <div class="skill-overlay leading-change" onclick="openModal('leading_change')" title="Leading Change"></div>
+            <div class="skill-overlay support-feedback" onclick="openModal('support_feedback')" title="Support and Feedback"></div>
+            
+            <!-- Right side skills -->
+            <div class="skill-overlay objective-setting" onclick="openModal('objective_setting')" title="Objective Setting"></div>
+            <div class="skill-overlay supporting-learning" onclick="openModal('supporting_learning')" title="Supporting Learning"></div>
+            <div class="skill-overlay managing-projects" onclick="openModal('managing_projects')" title="Managing Projects and Tasks"></div>
+            <div class="skill-overlay thriving-environment" onclick="openModal('thriving_environment')" title="Thriving Environment"></div>
+            <div class="skill-overlay decision-making" onclick="openModal('decision_making')" title="Decision Making"></div>
+            
+            <!-- Core leadership skills -->
+            <div class="skill-overlay mentor" onclick="openModal('mentor')" title="Mentor"></div>
+            <div class="skill-overlay delegate" onclick="openModal('delegate')" title="Delegate"></div>
+            <div class="skill-overlay direct" onclick="openModal('direct')" title="Direct"></div>
+            <div class="skill-overlay coach" onclick="openModal('coach')" title="Coach"></div>
+            
+            <!-- Assessment button -->
+            <div class="skill-overlay assessment" onclick="openModal('assessment')" title="Take Assessment"></div>
         </div>
     </div>
 
-    <div class="modal-overlay" id="modalOverlay">
-        <div class="modal">
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
             <div class="modal-header">
                 <div class="modal-title" id="modalTitle"></div>
-                <button class="close-button" id="closeButton">✕</button>
+                <button class="close-btn" onclick="closeModal()">×</button>
             </div>
-            <div class="subtopics-list" id="subtopicsList">
-                <!-- Subtopics will be generated here -->
+            <div class="modal-description" id="modalDescription"></div>
+            <div class="action-buttons">
+                <a href="#" class="action-btn" id="primaryBtn" target="_parent">Start Learning Path</a>
+                <a href="#" class="action-btn" id="secondaryBtn" target="_parent">Take Assessment</a>
             </div>
         </div>
     </div>
 
     <script>
-        // Topic data - customize this to match your LXP content
-        const topicsData = [
-            {
-                id: 'leadership',
-                title: 'Motivation',
-                description: 'Develop essential leadership competencies and management techniques',
-                icon: '👑',
-                subtopics: [
-                    {
-                        title: 'Skill 1',
-                        description: 'Learn to think strategically and make informed decisions',
-                        icon: '🎯',
-                        url: 'https://thelearningarena.streamlxp.com/courses/832/home'
-                    },
-                    {
-                        title: 'Skill 2',
-                        description: 'Master the art of leading and motivating teams',
-                        icon: '👥',
-                        url: 'https://your-lxp.com/leadership/team-management'
-                    },
-                    {
-                        title: 'Skill 3',
-                        description: 'Enhance your verbal and written communication abilities',
-                        icon: '💬',
-                        url: 'https://your-lxp.com/leadership/communication'
-                    },
-                    {
-                        title: 'Skill 4',
-                        description: 'Learn techniques for resolving workplace conflicts',
-                        icon: '🤝',
-                        url: 'https://your-lxp.com/leadership/conflict-resolution'
-                    }
-                ]
+        const skills = {
+            understanding_individuals: {
+                title: '👤 Understanding Individuals',
+                description: 'Develop skills to understand individual motivations, strengths, and working styles to lead each person effectively.',
+                primary: 'https://your-lxp.com/individuals/learning-path',
+                secondary: 'https://your-lxp.com/individuals/assessment'
             },
-            {
-                id: 'technology',
-                title: 'Collaboration',
-                description: 'Stay current with the latest technological trends and tools',
-                icon: '💻',
-                subtopics: [
-                    {
-                        title: 'Data Analytics',
-                        description: 'Master data analysis and visualization techniques',
-                        icon: '📊',
-                        url: 'https://your-lxp.com/technology/data-analytics'
-                    },
-                    {
-                        title: 'Cloud Computing',
-                        description: 'Understanding cloud platforms and services',
-                        icon: '☁️',
-                        url: 'https://your-lxp.com/technology/cloud-computing'
-                    },
-                    {
-                        title: 'Cybersecurity',
-                        description: 'Learn essential cybersecurity principles and practices',
-                        icon: '🔐',
-                        url: 'https://your-lxp.com/technology/cybersecurity'
-                    },
-                    {
-                        title: 'AI & Machine Learning',
-                        description: 'Explore artificial intelligence and ML fundamentals',
-                        icon: '🤖',
-                        url: 'https://your-lxp.com/technology/ai-ml'
-                    }
-                ]
+            team_vision: {
+                title: '🎯 Team Vision',
+                description: 'Learn to create compelling visions, communicate them effectively, and build team alignment around shared goals.',
+                primary: 'https://your-lxp.com/vision/learning-path',
+                secondary: 'https://your-lxp.com/vision/assessment'
             },
-            {
-                id: 'communication',
-                title: 'Leading Change',
-                description: 'Enhance your professional communication and presentation skills',
-                icon: '🎤',
-                subtopics: [
-                    {
-                        title: 'Public Speaking',
-                        description: 'Build confidence in public speaking and presentations',
-                        icon: '🎙️',
-                        url: 'https://your-lxp.com/communication/public-speaking'
-                    },
-                    {
-                        title: 'Written Communication',
-                        description: 'Improve your business writing and documentation skills',
-                        icon: '✍️',
-                        url: 'https://your-lxp.com/communication/written-communication'
-                    },
-                    {
-                        title: 'Cross-Cultural Communication',
-                        description: 'Navigate communication across different cultures',
-                        icon: '🌍',
-                        url: 'https://your-lxp.com/communication/cross-cultural'
-                    },
-                    {
-                        title: 'Digital Communication',
-                        description: 'Master modern digital communication tools and etiquette',
-                        icon: '📱',
-                        url: 'https://your-lxp.com/communication/digital'
-                    }
-                ]
+            collaboration: {
+                title: '🤝 Collaboration',
+                description: 'Build effective collaboration skills including team dynamics, conflict resolution, and cross-functional working.',
+                primary: 'https://your-lxp.com/collaboration/learning-path',
+                secondary: 'https://your-lxp.com/collaboration/assessment'
             },
-            {
-                id: 'project-management',
-                title: 'Support and Feedback',
-                description: 'Learn methodologies and tools for successful project delivery',
-                icon: '📋',
-                subtopics: [
-                    {
-                        title: 'Agile Methodology',
-                        description: 'Master Agile and Scrum project management approaches',
-                        icon: '🔄',
-                        url: 'https://your-lxp.com/pm/agile'
-                    },
-                    {
-                        title: 'Risk Management',
-                        description: 'Identify, assess, and mitigate project risks',
-                        icon: '⚠️',
-                        url: 'https://your-lxp.com/pm/risk-management'
-                    },
-                    {
-                        title: 'Resource Planning',
-                        description: 'Optimize resource allocation and scheduling',
-                        icon: '📅',
-                        url: 'https://your-lxp.com/pm/resource-planning'
-                    },
-                    {
-                        title: 'Quality Assurance',
-                        description: 'Ensure project deliverables meet quality standards',
-                        icon: '✅',
-                        url: 'https://your-lxp.com/pm/quality-assurance'
-                    }
-                ]
+            leading_change: {
+                title: '🚀 Leading Change',
+                description: 'Develop change leadership capabilities including stakeholder engagement, communication strategies, and sustaining transformation.',
+                primary: 'https://your-lxp.com/change/learning-path',
+                secondary: 'https://your-lxp.com/change/assessment'
             },
-            {
-                id: 'personal-development',
-                title: 'Objective Setting',
-                description: 'Grow personally and professionally with self-improvement skills',
-                icon: '🌱',
-                subtopics: [
-                    {
-                        title: 'Time Management',
-                        description: 'Optimize your productivity and time allocation',
-                        icon: '⏰',
-                        url: 'https://your-lxp.com/personal/time-management'
-                    },
-                    {
-                        title: 'Emotional Intelligence',
-                        description: 'Develop awareness and management of emotions',
-                        icon: '❤️',
-                        url: 'https://your-lxp.com/personal/emotional-intelligence'
-                    },
-                    {
-                        title: 'Critical Thinking',
-                        description: 'Enhance your analytical and problem-solving skills',
-                        icon: '🧠',
-                        url: 'https://your-lxp.com/personal/critical-thinking'
-                    },
-                    {
-                        title: 'Stress Management',
-                        description: 'Learn techniques for managing workplace stress',
-                        icon: '🧘',
-                        url: 'https://your-lxp.com/personal/stress-management'
-                    }
-                ]
+            support_feedback: {
+                title: '💬 Support and Feedback',
+                description: 'Master the art of providing constructive feedback, active listening, and emotional support to help team members grow.',
+                primary: 'https://your-lxp.com/feedback/learning-path',
+                secondary: 'https://your-lxp.com/feedback/assessment'
             },
-            {
-                id: 'finance',
-                title: 'Supporting Learning',
-                description: 'Build understanding of financial principles and business acumen',
-                icon: '💰',
-                subtopics: [
-                    {
-                        title: 'Budgeting & Planning',
-                        description: 'Master financial planning and budget management',
-                        icon: '📈',
-                        url: 'https://your-lxp.com/finance/budgeting'
-                    },
-                    {
-                        title: 'Investment Basics',
-                        description: 'Understanding investment principles and strategies',
-                        icon: '📊',
-                        url: 'https://your-lxp.com/finance/investments'
-                    },
-                    {
-                        title: 'Financial Analysis',
-                        description: 'Learn to analyze financial statements and metrics',
-                        icon: '🔍',
-                        url: 'https://your-lxp.com/finance/analysis'
-                    },
-                    {
-                        title: 'Risk Assessment',
-                        description: 'Evaluate and manage financial risks effectively',
-                        icon: '⚖️',
-                        url: 'https://your-lxp.com/finance/risk-assessment'
-                    }
-                ]
+            objective_setting: {
+                title: '🎯 Objective Setting',
+                description: 'Learn to set clear, measurable objectives that align with organizational goals and drive individual and team performance.',
+                primary: 'https://your-lxp.com/objectives/learning-path',
+                secondary: 'https://your-lxp.com/objectives/assessment'
+            },
+            supporting_learning: {
+                title: '📚 Supporting Learning',
+                description: 'Develop capabilities to identify learning needs, create development plans, and foster continuous growth in your team.',
+                primary: 'https://your-lxp.com/learning/learning-path',
+                secondary: 'https://your-lxp.com/learning/assessment'
+            },
+            managing_projects: {
+                title: '📋 Managing Projects and Tasks',
+                description: 'Master project management fundamentals including planning, resource allocation, progress tracking, and quality delivery.',
+                primary: 'https://your-lxp.com/projects/learning-path',
+                secondary: 'https://your-lxp.com/projects/assessment'
+            },
+            thriving_environment: {
+                title: '⭐ Creating Thriving Environment',
+                description: 'Learn to build positive, inclusive environments where team members feel safe, valued, and motivated to do their best work.',
+                primary: 'https://your-lxp.com/environment/learning-path',
+                secondary: 'https://your-lxp.com/environment/assessment'
+            },
+            decision_making: {
+                title: '🎯 Decision Making',
+                description: 'Develop skills to make effective decisions in complex situations, using data, frameworks, and stakeholder input to drive optimal outcomes.',
+                primary: 'https://your-lxp.com/decisions/learning-path',
+                secondary: 'https://your-lxp.com/decisions/assessment'
+            },
+            mentor: {
+                title: '🎓 Mentor',
+                description: 'Share wisdom and experience to develop long-term capability and growth. Learn mentoring skills including sharing experience and providing career guidance.',
+                primary: 'https://your-lxp.com/mentor/learning-path',
+                secondary: 'https://your-lxp.com/mentor/assessment'
+            },
+            delegate: {
+                title: '🔄 Delegate',
+                description: 'Assign ownership and step back to let people deliver autonomously. Master delegation skills including task assignment and empowerment.',
+                primary: 'https://your-lxp.com/delegate/learning-path',
+                secondary: 'https://your-lxp.com/delegate/assessment'
+            },
+            direct: {
+                title: '📢 Direct',
+                description: 'Provide clear guidance and structure when people need specific direction. Learn directive leadership including clear instructions and performance management.',
+                primary: 'https://your-lxp.com/direct/learning-path',
+                secondary: 'https://your-lxp.com/direct/assessment'
+            },
+            coach: {
+                title: '🏃 Coach',
+                description: 'Guide people to find their own solutions through questions and feedback. Develop coaching capabilities including powerful questioning and goal setting.',
+                primary: 'https://your-lxp.com/coach/learning-path',
+                secondary: 'https://your-lxp.com/coach/assessment'
+            },
+            assessment: {
+                title: '📊 Skills Assessment',
+                description: 'Take a skills assessment to find out which skills you should focus on developing. Identify your leadership strengths and development opportunities.',
+                primary: 'https://your-lxp.com/assessment/start',
+                secondary: 'https://your-lxp.com/assessment/results'
             }
-        ];
+        };
 
-        // Generate topic cards
-        function generateTopics() {
-            const topicsGrid = document.getElementById('topicsGrid');
-            topicsGrid.innerHTML = '';
-
-            topicsData.forEach(topic => {
-                const topicCard = document.createElement('div');
-                topicCard.className = 'topic-card';
-                topicCard.innerHTML = `
-                    <div class="topic-icon">${topic.icon}</div>
-                    <div class="topic-title">${topic.title}</div>
-                    <div class="topic-description">${topic.description}</div>
-                `;
-                
-                topicCard.addEventListener('click', () => openModal(topic));
-                topicsGrid.appendChild(topicCard);
-            });
+        function openModal(skillKey) {
+            const skill = skills[skillKey];
+            if (skill) {
+                document.getElementById('modalTitle').textContent = skill.title;
+                document.getElementById('modalDescription').textContent = skill.description;
+                document.getElementById('primaryBtn').href = skill.primary;
+                document.getElementById('secondaryBtn').href = skill.secondary;
+                document.getElementById('modal').classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
         }
 
-        // Open modal with subtopics
-        function openModal(topic) {
-            const modalOverlay = document.getElementById('modalOverlay');
-            const modalTitle = document.getElementById('modalTitle');
-            const subtopicsList = document.getElementById('subtopicsList');
-
-            modalTitle.innerHTML = `${topic.icon} ${topic.title}`;
-            subtopicsList.innerHTML = '';
-
-            topic.subtopics.forEach(subtopic => {
-                const subtopicItem = document.createElement('a');
-                subtopicItem.className = 'subtopic-item';
-                subtopicItem.href = subtopic.url;
-                subtopicItem.target = '_parent';
-                subtopicItem.innerHTML = `
-                    <div class="subtopic-icon">${subtopic.icon}</div>
-                    <div class="subtopic-content">
-                        <div class="subtopic-title">${subtopic.title}</div>
-                        <div class="subtopic-description">${subtopic.description}</div>
-                    </div>
-                    <div class="arrow-icon">→</div>
-                `;
-                subtopicsList.appendChild(subtopicItem);
-            });
-
-            modalOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        // Close modal
         function closeModal() {
-            const modalOverlay = document.getElementById('modalOverlay');
-            modalOverlay.classList.remove('active');
+            document.getElementById('modal').classList.remove('show');
             document.body.style.overflow = 'auto';
         }
 
-        // Event listeners
-        document.getElementById('closeButton').addEventListener('click', closeModal);
-        document.getElementById('modalOverlay').addEventListener('click', (e) => {
-            if (e.target === document.getElementById('modalOverlay')) {
-                closeModal();
-            }
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
         });
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
         });
-
-        // Initialize
-        generateTopics();
     </script>
 </body>
 </html>

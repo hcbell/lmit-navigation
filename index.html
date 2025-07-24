@@ -27,6 +27,10 @@
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+            min-height: 600px; /* Fallback height if image doesn't load */
+            background: #f0f6ff;
+            border: 2px dashed #103F6B;
+            border-radius: 12px;
         }
         
         .diagram-image {
@@ -34,8 +38,11 @@
             height: auto;
             display: block;
             border-radius: 12px;
+            min-height: 500px; /* Minimum height */
+            object-fit: contain; /* Maintain aspect ratio */
         }
         
+        /* Option A: Invisible overlay areas (current working version) */
         .skill-overlay {
             position: absolute;
             cursor: pointer;
@@ -47,6 +54,21 @@
             background: rgba(16, 63, 107, 0.15);
             transform: scale(1.03);
             box-shadow: 0 4px 12px rgba(16, 63, 107, 0.2);
+        }
+        
+        /* Option B: Custom button images (you can switch to this) */
+        .skill-button-image {
+            position: absolute;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 8px;
+            opacity: 0.9;
+        }
+        
+        .skill-button-image:hover {
+            transform: translateY(-3px) scale(1.05);
+            filter: brightness(1.1) drop-shadow(0 8px 16px rgba(16, 63, 107, 0.3));
+            opacity: 1;
         }
         
         /* Left side skills */
@@ -158,8 +180,16 @@
             transform: translateY(-1px);
         }
         
+        /* Positioning adjustment helpers - uncomment these to see the clickable areas while adjusting */
+        /*
+        .skill-overlay {
+            border: 2px dashed red;
+            background: rgba(255, 0, 0, 0.1);
+        }
+        */
+        
         @media (max-width: 768px) {
-            .skill-overlay {
+            .skill-overlay, .skill-button-image {
                 border: 1px solid rgba(16, 63, 107, 0.3);
                 background: rgba(16, 63, 107, 0.05);
             }
@@ -174,34 +204,60 @@
 <body>
     <div class="container">
         <div class="diagram-container">
-            <!-- Your diagram image -->
-            <img src="leadership.diagram.png" 
+            <!-- STEP 1: Your main diagram image -->
+            <!-- Replace 'leadership-diagram.jpg' with your image filename -->
+            <!-- If you see a dashed box, the image isn't loading - check the filename -->
+            <img src="https://via.placeholder.com/1200x800/f0f6ff/103F6B?text=Upload+Your+Leadership+Diagram+Here" 
                  alt="Agile Leadership Skills Diagram" 
-                 class="diagram-image" />
+                 class="diagram-image" 
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             
-            <!-- Clickable overlay areas positioned over your buttons -->
-            <!-- Left side skills -->
+            <!-- Fallback content if image fails to load -->
+            <div style="display: none; padding: 100px; text-align: center; color: #103F6B; background: #f0f6ff; border-radius: 12px; border: 2px dashed #103F6B;">
+                <h2>Image Not Found</h2>
+                <p>Please upload your leadership diagram image and update the src attribute on line 88</p>
+                <p>Current filename: <code>leadership-diagram.jpg</code></p>
+            </div>
+            
+            <!-- STEP 2: Choose your approach - OPTION A or OPTION B -->
+            
+            <!-- OPTION A: Invisible clickable areas (CURRENT - WORKING) -->
+            <!-- These are invisible overlays positioned over your existing buttons -->
             <div class="skill-overlay understanding-individuals" onclick="openModal('understanding_individuals')" title="Understanding Individuals"></div>
             <div class="skill-overlay team-vision" onclick="openModal('team_vision')" title="Team Vision"></div>
             <div class="skill-overlay collaboration" onclick="openModal('collaboration')" title="Collaboration"></div>
             <div class="skill-overlay leading-change" onclick="openModal('leading_change')" title="Leading Change"></div>
             <div class="skill-overlay support-feedback" onclick="openModal('support_feedback')" title="Support and Feedback"></div>
-            
-            <!-- Right side skills -->
             <div class="skill-overlay objective-setting" onclick="openModal('objective_setting')" title="Objective Setting"></div>
             <div class="skill-overlay supporting-learning" onclick="openModal('supporting_learning')" title="Supporting Learning"></div>
             <div class="skill-overlay managing-projects" onclick="openModal('managing_projects')" title="Managing Projects and Tasks"></div>
             <div class="skill-overlay thriving-environment" onclick="openModal('thriving_environment')" title="Thriving Environment"></div>
             <div class="skill-overlay decision-making" onclick="openModal('decision_making')" title="Decision Making"></div>
-            
-            <!-- Core leadership skills -->
             <div class="skill-overlay mentor" onclick="openModal('mentor')" title="Mentor"></div>
             <div class="skill-overlay delegate" onclick="openModal('delegate')" title="Delegate"></div>
             <div class="skill-overlay direct" onclick="openModal('direct')" title="Direct"></div>
             <div class="skill-overlay coach" onclick="openModal('coach')" title="Coach"></div>
-            
-            <!-- Assessment button -->
             <div class="skill-overlay assessment" onclick="openModal('assessment')" title="Take Assessment"></div>
+            
+            <!-- OPTION B: Custom button images (UNCOMMENT TO USE) -->
+            <!-- First create your background image without buttons, then add button images here -->
+            <!--
+            <img src="understanding-individuals-btn.png" class="skill-button-image understanding-individuals" onclick="openModal('understanding_individuals')" alt="Understanding Individuals" />
+            <img src="team-vision-btn.png" class="skill-button-image team-vision" onclick="openModal('team_vision')" alt="Team Vision" />
+            <img src="collaboration-btn.png" class="skill-button-image collaboration" onclick="openModal('collaboration')" alt="Collaboration" />
+            <img src="leading-change-btn.png" class="skill-button-image leading-change" onclick="openModal('leading_change')" alt="Leading Change" />
+            <img src="support-feedback-btn.png" class="skill-button-image support-feedback" onclick="openModal('support_feedback')" alt="Support and Feedback" />
+            <img src="objective-setting-btn.png" class="skill-button-image objective-setting" onclick="openModal('objective_setting')" alt="Objective Setting" />
+            <img src="supporting-learning-btn.png" class="skill-button-image supporting-learning" onclick="openModal('supporting_learning')" alt="Supporting Learning" />
+            <img src="managing-projects-btn.png" class="skill-button-image managing-projects" onclick="openModal('managing_projects')" alt="Managing Projects and Tasks" />
+            <img src="thriving-environment-btn.png" class="skill-button-image thriving-environment" onclick="openModal('thriving_environment')" alt="Thriving Environment" />
+            <img src="decision-making-btn.png" class="skill-button-image decision-making" onclick="openModal('decision_making')" alt="Decision Making" />
+            <img src="mentor-btn.png" class="skill-button-image mentor" onclick="openModal('mentor')" alt="Mentor" />
+            <img src="delegate-btn.png" class="skill-button-image delegate" onclick="openModal('delegate')" alt="Delegate" />
+            <img src="direct-btn.png" class="skill-button-image direct" onclick="openModal('direct')" alt="Direct" />
+            <img src="coach-btn.png" class="skill-button-image coach" onclick="openModal('coach')" alt="Coach" />
+            <img src="assessment-btn.png" class="skill-button-image assessment" onclick="openModal('assessment')" alt="Take Assessment" />
+            -->
         </div>
     </div>
 

@@ -28,8 +28,7 @@
             max-width: 1200px;
             margin: 0 auto;
             min-height: 600px;
-            background: #f0f6ff;
-            border: 2px dashed #103F6B;
+            background: #f8f9fa;
             border-radius: 12px;
         }
         
@@ -40,6 +39,7 @@
             border-radius: 12px;
             min-height: 500px;
             object-fit: contain;
+            background: #f0f6ff;
         }
         
         /* Custom button images with proper aspect ratio handling */
@@ -187,15 +187,17 @@
     <div class="container">
         <div class="diagram-container">
             <!-- Your main diagram background (without buttons) -->
-            <img src="task.team.individual.png" 
+            <!-- Replace 'leadership-diagram-background.jpg' with your actual filename -->
+            <img src="leadership-diagram-background.jpg" 
                  alt="Agile Leadership Skills Diagram Background" 
                  class="diagram-image" 
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             
             <!-- Fallback content if image fails to load -->
-            <div style="display: none; padding: 100px; text-align: center; color: #103F6B; background: #f0f6ff; border-radius: 12px; border: 2px dashed #103F6B;">
-                <h2>Background Image Not Found</h2>
-                <p>Please upload your leadership diagram background and update line 80</p>
+            <div style="display: none; padding: 100px; text-align: center; color: #103F6B; background: #f0f6ff; border-radius: 12px; border: 2px dashed #ccc;">
+                <h2>📁 Upload Your Background Image</h2>
+                <p>Replace <code>task.team.individual.png</code> on line 82 with your actual filename</p>
+                <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">The container will show the proper size once your image loads</p>
             </div>
             
             <!-- Custom button images positioned over the background -->

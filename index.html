@@ -60,11 +60,6 @@
             opacity: 1;
         }
         
-        /* Slower return animation after modal opens */
-        .skill-button-image:active {
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
         /* Button positioning - now with auto width for natural aspect ratios */
         /* Left side skills */
         .understanding-individuals { top: 18%; left: 2%; }
@@ -193,7 +188,7 @@
         <div class="diagram-container">
             <!-- Your main diagram background (without buttons) -->
             <!-- Replace 'leadership-diagram-background.jpg' with your actual filename -->
-            <img src="leadership-diagram-background.jpg" 
+            <img src="task.team.individual.png" 
                  alt="Agile Leadership Skills Diagram Background" 
                  class="diagram-image" 
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
@@ -201,7 +196,7 @@
             <!-- Fallback content if image fails to load -->
             <div style="display: none; padding: 100px; text-align: center; color: #103F6B; background: #f0f6ff; border-radius: 12px; border: 2px dashed #ccc;">
                 <h2>📁 Upload Your Background Image</h2>
-                <p>Replace <code>leadership-diagram-background.jpg</code> on line 82 with your actual filename</p>
+                <p>Replace <code>task.team.individual.png</code> on line 82 with your actual filename</p>
                 <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">The container will show the proper size once your image loads</p>
             </div>
             

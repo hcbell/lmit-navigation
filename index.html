@@ -452,31 +452,20 @@
             }
         };
 
-     function openModal(skillKey) {
+  function openModal(skillKey) {
     const skill = skills[skillKey];
     if (skill) {
         document.getElementById('modalTitle').textContent = skill.title;
         document.getElementById('modalDescription').textContent = skill.description;
         document.getElementById('primaryBtn').href = skill.primary;
         document.getElementById('secondaryBtn').href = skill.secondary;
-        
-        // Add special class for assessment modal
-        const modal = document.getElementById('modal');
-        modal.classList.remove('assessment-modal'); // Remove first in case it was there
-        
-        if (skillKey === 'assessment') {
-            modal.classList.add('assessment-modal');
-        }
-        
-        modal.classList.add('show');
+        document.getElementById('modal').classList.add('show');
         document.body.style.overflow = 'hidden';
     }
 }
 
 function closeModal() {
-    const modal = document.getElementById('modal');
-    modal.classList.remove('show');
-    modal.classList.remove('assessment-modal'); // Clean up the class
+    document.getElementById('modal').classList.remove('show');
     document.body.style.overflow = 'auto';
 }
 

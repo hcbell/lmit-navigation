@@ -21,38 +21,39 @@
             padding: 15px;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
+        
         .page-header {
-    text-align: center;
-    margin-bottom: 5px;
-    padding: 5px 0;
-}
+            text-align: center;
+            margin-bottom: 5px;
+            padding: 5px 0;
+        }
 
-.page-title {
-    font-size: 2.5rem;
-    font-weight: 700;
-    color: #103F6B;
-    margin: 0 0 10px 0;
-    text-shadow: 0 2px 4px rgba(16, 63, 107, 0.1);
-}
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #103F6B;
+            margin: 0 0 10px 0;
+            text-shadow: 0 2px 4px rgba(16, 63, 107, 0.1);
+        }
 
-.page-subtitle {
-    font-size: 1.1rem;
-    color: #64748b;
-    margin: 0;
-    font-weight: 400;
-    opacity: 0.8;
-}
+        .page-subtitle {
+            font-size: 1.1rem;
+            color: #64748b;
+            margin: 0;
+            font-weight: 400;
+            opacity: 0.8;
+        }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .page-title {
-        font-size: 2rem;
-    }
-    
-    .page-subtitle {
-        font-size: 1rem;
-    }
-}
+        @media (max-width: 768px) {
+            .page-title {
+                font-size: 2rem;
+            }
+            
+            .page-subtitle {
+                font-size: 1rem;
+            }
+        }
+        
         .diagram-container {
             position: relative;
             width: 100%;
@@ -73,7 +74,6 @@
             background: #f0f6ff;
         }
         
-        /* Custom button images with proper aspect ratio handling */
         .skill-button-image {
             position: absolute;
             cursor: pointer;
@@ -82,7 +82,7 @@
             opacity: 0.9;
             object-fit: contain;
             height: auto;
-            max-width: 200px; /* Reasonable max size */
+            max-width: 200px;
         }
         
         .skill-button-image:hover {
@@ -90,31 +90,29 @@
             filter: brightness(1.1) drop-shadow(0 8px 16px rgba(16, 63, 107, 0.3));
             opacity: 1;
         }
+        
         .assessment:hover {
-    transform: translateX(-50%) translateY(-3px) scale(1.05);
-}
-        /* Button positioning - now with auto width for natural aspect ratios */
-        /* Left side skills */
+            transform: translateX(-50%) translateY(-3px) scale(1.05);
+        }
+        
+        /* Button positioning */
         .understanding-individuals { top: 18%; left: 2%; }
         .team-vision { top: 32%; left: 2%; }
         .collaboration { top: 46%; left: 2%; }
         .leading-change { top: 60%; left: 2%; }
         .support-feedback { top: 74%; left: 2%; }
         
-        /* Right side skills */
         .objective-setting { top: 18%; right: 2%; }
         .supporting-learning { top: 32%; right: 2%; }
         .managing-projects { top: 46%; right: 2%; }
         .thriving-environment { top: 60%; right: 2%; }
         .decision-making { top: 74%; right: 2%; }
         
-        /* Core leadership skills around center */
         .mentor { top: 22%; left: 22%; }
         .delegate { top: 22%; right: 22%; }
         .direct { top: 69%; left: 22%; }
         .coach { top: 69%; right: 22%; }
         
-        /* Assessment button */
         .assessment { bottom: 87%; left: 50%; transform: translateX(-50%); }
         
         .modal {
@@ -136,11 +134,12 @@
             background: white;
             border-radius: 20px;
             padding: 30px;
-            max-width: 600px;
+            max-width: 700px;
             width: 90%;
-            max-height: 80vh;
+            max-height: 85vh;
             overflow-y: auto;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            transition: all 0.3s ease;
         }
         
         .modal-header {
@@ -180,6 +179,39 @@
             font-size: 1rem;
         }
         
+        .detailed-content {
+            display: none;
+            margin-bottom: 25px;
+        }
+        
+        .detailed-content.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .detailed-content h3 {
+            color: #103F6B;
+            font-size: 1.2rem;
+            margin: 20px 0 10px 0;
+            font-weight: 600;
+        }
+        
+        .detailed-content ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        
+        .detailed-content li {
+            margin: 8px 0;
+            line-height: 1.5;
+            color: #4b5563;
+        }
+        
         .action-buttons {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -191,16 +223,27 @@
             background: #103F6B;
             color: white;
             text-decoration: none;
+            border: none;
             border-radius: 8px;
             text-align: center;
             font-weight: 600;
             transition: all 0.2s ease;
             font-family: 'Montserrat', sans-serif;
+            cursor: pointer;
+            font-size: 1rem;
         }
         
         .action-btn:hover {
             background: #0d3454;
             transform: translateY(-1px);
+        }
+        
+        .action-btn.secondary {
+            background: #64748b;
+        }
+        
+        .action-btn.secondary:hover {
+            background: #475569;
         }
         
         @media (max-width: 768px) {
@@ -213,6 +256,11 @@
                 grid-template-columns: 1fr;
                 gap: 10px;
             }
+            
+            .modal-content {
+                max-width: 95%;
+                padding: 20px;
+            }
         }
     </style>
 </head>
@@ -223,21 +271,16 @@
             <p class="page-subtitle">Select a button to find out more about each leadership skill or take a skills assessment.</p>
         </div>
         <div class="diagram-container">
-            <!-- Your main diagram background (without buttons) -->
-            <!-- Replace 'leadership-diagram-background.jpg' with your actual filename -->
             <img src="task.team.individual.png" 
                  alt="Agile Leadership Skills Diagram Background" 
                  class="diagram-image" 
                  onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
             
-            <!-- Fallback content if image fails to load -->
             <div style="display: none; padding: 100px; text-align: center; color: #103F6B; background: #f0f6ff; border-radius: 12px; border: 2px dashed #ccc;">
                 <h2>📁 Upload Your Background Image</h2>
                 <p>Replace <code>task.team.individual.png</code> on line 82 with your actual filename</p>
                 <p style="margin-top: 20px; font-size: 0.9rem; color: #666;">The container will show the proper size once your image loads</p>
             </div>
-            
-            <!-- Custom button images positioned over the background -->
             
             <!-- Left side button images -->
             <img src="understanding-individuals-btn.png" 
@@ -342,115 +385,388 @@
                 <div class="modal-title" id="modalTitle"></div>
                 <button class="close-btn" onclick="closeModal()">×</button>
             </div>
+            
+            <!-- Overview content (shown by default) -->
             <div class="modal-description" id="modalDescription"></div>
+            
+            <!-- Detailed content (shown when expanded) -->
+            <div class="detailed-content" id="detailedContent"></div>
+            
             <div class="action-buttons">
-                <a href="#" class="action-btn" id="primaryBtn" target="_blank">Start Learning</a>
-                <a href="#" class="action-btn" id="secondaryBtn" target="_blank">Take Skills Assessment</a>
+                <button class="action-btn secondary" id="toggleBtn" onclick="toggleDetailView()">Find Out More</button>
+                <a href="#" class="action-btn" id="learningBtn" target="_blank">Start Learning</a>
             </div>
         </div>
     </div>
 
     <script>
+        let isDetailView = false;
+        let currentSkill = null;
+
         const skills = {
             understanding_individuals: {
                 title: '👤 Understanding Individuals',
                 description: 'Develop skills to understand individual motivations, strengths, interests and personal values to lead each person effectively.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/understanding-individuals/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/understanding-individuals/home',
+                details: {
+                    overview: 'Understanding individuals is about recognizing that each team member brings unique motivations, strengths, and working styles to the team.',
+                    keyBehaviors: [
+                        'Actively listen to understand individual perspectives and concerns',
+                        'Identify and leverage each person\'s unique strengths and talents',
+                        'Adapt communication style to suit different personality types',
+                        'Recognize individual motivators and career aspirations',
+                        'Show genuine interest in team members as whole people'
+                    ],
+                    developmentAreas: [
+                        'Emotional intelligence and empathy',
+                        'Active listening techniques',
+                        'Personality assessment tools (DISC, Myers-Briggs, etc.)',
+                        'One-on-one conversation skills',
+                        'Cultural awareness and sensitivity'
+                    ]
+                }
             },
             team_vision: {
                 title: '🎯 Team Vision',
                 description: 'Learn to create compelling visions, communicate them effectively, and build team alignment around shared goals.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/team-vision/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/team-vision/home',
+                details: {
+                    overview: 'Team vision involves creating and communicating a clear, inspiring picture of what the team aims to achieve and how it contributes to larger organizational goals.',
+                    keyBehaviors: [
+                        'Articulate a clear and inspiring team vision',
+                        'Connect individual roles to the bigger picture',
+                        'Regularly communicate progress toward vision',
+                        'Involve team members in vision development',
+                        'Adapt vision communication for different audiences'
+                    ],
+                    developmentAreas: [
+                        'Strategic thinking and planning',
+                        'Storytelling and narrative creation',
+                        'Presentation and communication skills',
+                        'Goal-setting frameworks (OKRs, SMART goals)',
+                        'Change communication strategies'
+                    ]
+                }
             },
             collaboration: {
                 title: '🤝 Collaboration',
                 description: 'Build effective collaboration skills, fostering the environment and mindset of collaborative working and modelling collaborative behaviours.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/collaboration/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/collaboration/home',
+                details: {
+                    overview: 'Collaboration is about creating an environment where team members work together effectively, share knowledge, and leverage collective strengths.',
+                    keyBehaviors: [
+                        'Facilitate open and inclusive team discussions',
+                        'Encourage knowledge sharing and cross-training',
+                        'Model collaborative behavior in all interactions',
+                        'Break down silos between team members or departments',
+                        'Create opportunities for team bonding and relationship building'
+                    ],
+                    developmentAreas: [
+                        'Facilitation and meeting management',
+                        'Conflict resolution and mediation',
+                        'Team dynamics and group psychology',
+                        'Virtual collaboration tools and techniques',
+                        'Cross-functional project management'
+                    ]
+                }
             },
             leading_change: {
                 title: '🚀 Leading Change',
                 description: 'Develop change leadership capabilities including stakeholder engagement, communication strategies, and sustaining transformation.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/leading-change/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/leading-change/home',
+                details: {
+                    overview: 'Leading change involves guiding teams through transitions, managing resistance, and ensuring successful adoption of new ways of working.',
+                    keyBehaviors: [
+                        'Communicate the need for change clearly and compellingly',
+                        'Address concerns and resistance with empathy',
+                        'Break down change into manageable steps',
+                        'Celebrate early wins and progress milestones',
+                        'Provide support and resources during transitions'
+                    ],
+                    developmentAreas: [
+                        'Change management frameworks (Kotter, ADKAR)',
+                        'Stakeholder analysis and engagement',
+                        'Resistance management techniques',
+                        'Communication planning and execution',
+                        'Organizational psychology and behavior'
+                    ]
+                }
             },
             support_feedback: {
                 title: '💬 Support and Feedback',
                 description: 'Master the art of providing constructive feedback, active listening, and emotional support to help team members grow.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/support-and-feedback/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/support-and-feedback/home',
+                details: {
+                    overview: 'Support and feedback involves creating a safe environment for growth through regular, constructive conversations that help team members develop.',
+                    keyBehaviors: [
+                        'Provide timely and specific feedback on performance',
+                        'Balance constructive criticism with recognition',
+                        'Create psychological safety for open dialogue',
+                        'Offer emotional support during challenging times',
+                        'Follow up on feedback to ensure understanding and progress'
+                    ],
+                    developmentAreas: [
+                        'Feedback models (SBI, GROW, etc.)',
+                        'Difficult conversation techniques',
+                        'Active listening and questioning skills',
+                        'Emotional intelligence and self-awareness',
+                        'Performance coaching methodologies'
+                    ]
+                }
             },
             objective_setting: {
                 title: '🎯 Objective Setting',
                 description: 'Learn to set clear, measurable objectives that align with organisational goals and drive individual and team performance.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/objective-setting/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/objective-setting/home',
+                details: {
+                    overview: 'Objective setting involves creating clear, measurable, and achievable goals that align individual and team efforts with organizational priorities.',
+                    keyBehaviors: [
+                        'Set SMART goals that are specific and measurable',
+                        'Align objectives with organizational strategy',
+                        'Involve team members in goal-setting process',
+                        'Regularly review and adjust objectives as needed',
+                        'Track progress and provide regular updates'
+                    ],
+                    developmentAreas: [
+                        'Goal-setting frameworks and methodologies',
+                        'Strategic alignment and cascading',
+                        'Performance measurement and KPIs',
+                        'Project planning and milestone tracking',
+                        'Agile and iterative planning approaches'
+                    ]
+                }
             },
             supporting_learning: {
                 title: '📚 Supporting Learning',
                 description: 'Develop capabilities to identify learning needs, create development plans, and foster continuous growth in your team.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/supporting-learning/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/supporting-learning/home',
+                details: {
+                    overview: 'Supporting learning involves identifying development opportunities, creating learning plans, and fostering a culture of continuous improvement.',
+                    keyBehaviors: [
+                        'Identify individual learning needs and gaps',
+                        'Create personalized development plans',
+                        'Provide learning opportunities and resources',
+                        'Encourage experimentation and learning from failure',
+                        'Share knowledge and facilitate peer learning'
+                    ],
+                    developmentAreas: [
+                        'Learning and development planning',
+                        'Adult learning principles and methodologies',
+                        'Mentoring and coaching techniques',
+                        'Knowledge management systems',
+                        'Training design and delivery'
+                    ]
+                }
             },
             managing_projects: {
                 title: '📋 Managing Projects and Tasks',
                 description: 'Master project management fundamentals including planning, resource allocation, progress tracking, and quality delivery.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/managing-projects-and-tasks/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/managing-projects-and-tasks/home',
+                details: {
+                    overview: 'Managing projects and tasks involves planning, organizing, and controlling resources and activities to achieve specific objectives within constraints.',
+                    keyBehaviors: [
+                        'Plan projects with clear scope, timeline, and resources',
+                        'Break down complex work into manageable tasks',
+                        'Monitor progress and adjust plans as needed',
+                        'Manage risks and dependencies proactively',
+                        'Ensure quality standards are met throughout delivery'
+                    ],
+                    developmentAreas: [
+                        'Project management methodologies (Agile, Waterfall, Hybrid)',
+                        'Resource planning and allocation',
+                        'Risk management and mitigation',
+                        'Quality assurance and control',
+                        'Stakeholder management and communication'
+                    ]
+                }
             },
             thriving_environment: {
                 title: '⭐ Creating Thriving Environment',
                 description: 'Learn to build positive, inclusive environments where team members feel safe, valued, and motivated to do their best work.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/thriving-environment/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/thriving-environment/home',
+                details: {
+                    overview: 'Creating a thriving environment involves building a culture where team members feel psychologically safe, valued, and empowered to contribute their best work.',
+                    keyBehaviors: [
+                        'Foster psychological safety and open communication',
+                        'Recognize and celebrate team achievements',
+                        'Promote work-life balance and wellbeing',
+                        'Encourage diversity of thought and perspective',
+                        'Address toxic behaviors and maintain team standards'
+                    ],
+                    developmentAreas: [
+                        'Psychological safety and trust building',
+                        'Recognition and reward systems',
+                        'Diversity, equity, and inclusion practices',
+                        'Team culture and values development',
+                        'Conflict resolution and team dynamics'
+                    ]
+                }
             },
             decision_making: {
                 title: '🎯 Decision Making',
                 description: 'Develop skills to make effective decisions in complex situations, using data, frameworks, and stakeholder input to drive optimal outcomes.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/decision-making/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/decision-making/home',
+                details: {
+                    overview: 'Decision making involves gathering relevant information, considering alternatives, and choosing the best course of action while managing uncertainty and risk.',
+                    keyBehaviors: [
+                        'Gather and analyze relevant data before deciding',
+                        'Consider multiple perspectives and alternatives',
+                        'Make timely decisions even with incomplete information',
+                        'Communicate decisions clearly with rationale',
+                        'Take responsibility for decision outcomes'
+                    ],
+                    developmentAreas: [
+                        'Decision-making frameworks and models',
+                        'Data analysis and interpretation',
+                        'Risk assessment and management',
+                        'Stakeholder consultation techniques',
+                        'Critical thinking and problem-solving'
+                    ]
+                }
             },
             mentor: {
                 title: '🎓 Mentor',
                 description: 'Share wisdom and experience to develop long-term capability and growth.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
+                details: {
+                    overview: 'Mentoring involves sharing experience and wisdom to guide others in their professional and personal development over time.',
+                    keyBehaviors: [
+                        'Share relevant experience and lessons learned',
+                        'Provide guidance on career development',
+                        'Offer perspective on industry trends and opportunities',
+                        'Support long-term growth and capability building',
+                        'Create networking and development opportunities'
+                    ],
+                    developmentAreas: [
+                        'Mentoring relationship building',
+                        'Career development planning',
+                        'Industry knowledge and expertise',
+                        'Networking and relationship management',
+                        'Wisdom sharing and storytelling'
+                    ]
+                }
             },
             delegate: {
                 title: '🔄 Delegate',
                 description: 'Assign ownership and step back to let people deliver autonomously. Master delegation skills including task assignment and empowerment.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
+                details: {
+                    overview: 'Delegation involves assigning authority and responsibility to team members while providing support and maintaining accountability.',
+                    keyBehaviors: [
+                        'Assign clear authority and responsibility',
+                        'Provide necessary resources and support',
+                        'Set clear expectations and deadlines',
+                        'Allow autonomy in approach and execution',
+                        'Monitor progress without micromanaging'
+                    ],
+                    developmentAreas: [
+                        'Task analysis and assignment',
+                        'Authority and responsibility frameworks',
+                        'Performance monitoring systems',
+                        'Trust building and empowerment',
+                        'Accountability and follow-up processes'
+                    ]
+                }
             },
             direct: {
                 title: '📢 Direct',
                 description: 'Provide clear guidance and structure when people need specific direction.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
+                details: {
+                    overview: 'Directing involves providing clear, specific instructions and guidance when team members need structure and explicit direction.',
+                    keyBehaviors: [
+                        'Give clear, specific instructions and expectations',
+                        'Define roles, responsibilities, and procedures',
+                        'Monitor performance closely and provide immediate feedback',
+                        'Make decisions quickly and communicate them clearly',
+                        'Provide structure and process when needed'
+                    ],
+                    developmentAreas: [
+                        'Command and control techniques',
+                        'Process design and documentation',
+                        'Performance monitoring and correction',
+                        'Clear communication and instruction',
+                        'Situational leadership assessment'
+                    ]
+                }
             },
             coach: {
                 title: '🏃 Coach',
                 description: 'Guide people to find their own solutions through questions and feedback. Develop coaching capabilities including powerful questioning and goal setting.',
-                primary: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
+                details: {
+                    overview: 'Coaching involves helping others discover their own solutions through powerful questioning, active listening, and supportive guidance.',
+                    keyBehaviors: [
+                        'Ask powerful questions to promote reflection',
+                        'Listen actively and reflect back what you hear',
+                        'Help others set meaningful goals and action plans',
+                        'Provide support and encouragement during challenges',
+                        'Facilitate self-discovery and learning'
+                    ],
+                    developmentAreas: [
+                        'Coaching models and frameworks (GROW, CLEAR)',
+                        'Powerful questioning techniques',
+                        'Active listening and reflection skills',
+                        'Goal setting and action planning',
+                        'Behavioral change and motivation'
+                    ]
+                }
             },
             assessment: {
                 title: '📊 Skills Assessment',
                 description: 'Take a skills assessment to find out which skills you should focus on developing. Identify your leadership strengths and development opportunities.',
-                 primary: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
-                secondary: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1'
+                learningUrl: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1',
+                details: {
+                    overview: 'The skills assessment helps you identify your current leadership capabilities and areas for development across all agile leadership competencies.',
+                    keyBehaviors: [
+                        'Complete honest self-assessment of current capabilities',
+                        'Identify top development priorities',
+                        'Create personalized learning plan',
+                        'Track progress over time',
+                        'Seek feedback from others on your assessment'
+                    ],
+                    developmentAreas: [
+                        'Self-awareness and reflection',
+                        'Development planning and goal setting',
+                        'Learning pathway design',
+                        'Progress tracking and measurement',
+                        '360-degree feedback processes'
+                    ]
+                }
             }
         };
 
         function openModal(skillKey) {
             const skill = skills[skillKey];
             if (skill) {
+                currentSkill = skillKey;
+                isDetailView = false;
+                
                 document.getElementById('modalTitle').textContent = skill.title;
                 document.getElementById('modalDescription').textContent = skill.description;
-                document.getElementById('primaryBtn').href = skill.primary;
-                document.getElementById('secondaryBtn').href = skill.secondary;
+                document.getElementById('learningBtn').href = skill.learningUrl;
+                
+                // Set up detailed content
+                const detailedContent = document.getElementById('detailedContent');
+                if (skill.details) {
+                    detailedContent.innerHTML = `
+                        <h3>Overview</h3>
+                        <p>${skill.details.overview}</p>
+                        
+                        <h3>Key Behaviors</h3>
+                        <ul>
+                            ${skill.details.keyBehaviors.map(behavior => `<li>${behavior}</li>`).join('')}
+                        </ul>
+                        
+                        <h3>Development Areas</h3>
+                        <ul>
+                            ${skill.details.developmentAreas.map(area => `<li>${area}</li>`).join('')}
+                        </ul>
+                    `;
+                }
+                
+                // Reset to overview mode
+                showOverview();
                 document.getElementById('modal').classList.add('show');
                 document.body.style.overflow = 'hidden';
             }
@@ -459,6 +775,32 @@
         function closeModal() {
             document.getElementById('modal').classList.remove('show');
             document.body.style.overflow = 'auto';
+            isDetailView = false;
+            currentSkill = null;
+        }
+
+        function toggleDetailView() {
+            if (isDetailView) {
+                showOverview();
+            } else {
+                showDetails();
+            }
+        }
+
+        function showOverview() {
+            isDetailView = false;
+            document.getElementById('modalDescription').style.display = 'block';
+            document.getElementById('detailedContent').classList.remove('show');
+            document.getElementById('toggleBtn').textContent = 'Find Out More';
+            document.getElementById('toggleBtn').classList.add('secondary');
+        }
+
+        function showDetails() {
+            isDetailView = true;
+            document.getElementById('modalDescription').style.display = 'none';
+            document.getElementById('detailedContent').classList.add('show');
+            document.getElementById('toggleBtn').textContent = 'See Less';
+            document.getElementById('toggleBtn').classList.remove('secondary');
         }
 
         // Close modal when clicking outside

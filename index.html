@@ -392,9 +392,15 @@
             <!-- Detailed content (shown when expanded) -->
             <div class="detailed-content" id="detailedContent"></div>
             
-            <div class="action-buttons">
+            <div class="action-buttons" id="actionButtons">
                 <button class="action-btn secondary" id="toggleBtn" onclick="toggleDetailView()">Find Out More</button>
                 <a href="#" class="action-btn" id="learningBtn" target="_blank">Start Learning</a>
+            </div>
+            
+            <!-- Special dual-expandable buttons for certain modals -->
+            <div class="action-buttons" id="dualActionButtons" style="display: none;">
+                <button class="action-btn secondary" id="leftExpandBtn" onclick="toggleDetailView('left')">Support, Resources and Experiences</button>
+                <button class="action-btn secondary" id="rightExpandBtn" onclick="toggleDetailView('right')">Understand the Skills</button>
             </div>
         </div>
     </div>
@@ -402,6 +408,7 @@
     <script>
         let isDetailView = false;
         let currentSkill = null;
+        let currentDetailSection = null; // For dual-expandable modals
 
         const skills = {
             understanding_individuals: {
@@ -713,25 +720,47 @@
                 }
             },
             assessment: {
-                title: '📊 Skills Assessment',
-                description: 'Take a skills assessment to find out which skills you should focus on developing. Identify your leadership strengths and development opportunities.',
-                learningUrl: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1',
-                details: {
-                    overview: 'The skills assessment helps you identify your current leadership capabilities and areas for development across all agile leadership competencies.',
-                    keyBehaviors: [
-                        'Complete honest self-assessment of current capabilities',
-                        'Identify top development priorities',
-                        'Create personalized learning plan',
-                        'Track progress over time',
-                        'Seek feedback from others on your assessment'
+                title: '📊 Agile Leadership',
+                description: 'Discover the agile leadership framework, explore support resources, and understand the core skills that drive effective leadership in today\'s dynamic environment.',
+                isDualExpandable: true,
+                leftSection: {
+                    title: 'Support, Resources and Experiences',
+                    overview: 'Access comprehensive support, learning resources, and development experiences designed to accelerate your agile leadership journey.',
+                    keyAreas: [
+                        'Personalized learning pathways and development plans',
+                        'Expert coaching and mentoring opportunities',
+                        'Peer learning networks and communities of practice',
+                        'Real-world case studies and leadership scenarios',
+                        'Interactive workshops and immersive experiences'
                     ],
-                    developmentAreas: [
-                        'Self-awareness and reflection',
-                        'Development planning and goal setting',
-                        'Learning pathway design',
-                        'Progress tracking and measurement',
-                        '360-degree feedback processes'
-                    ]
+                    resources: [
+                        'Online learning platform with 100+ leadership modules',
+                        'Monthly leadership masterclasses with industry experts',
+                        'Leadership assessment tools and 360-degree feedback',
+                        'Resource library with templates, guides, and toolkits',
+                        'Access to leadership conferences and networking events'
+                    ],
+                    actionUrl: 'https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home',
+                    actionText: 'Explore Resources'
+                },
+                rightSection: {
+                    title: 'Understand the Skills',
+                    overview: 'The agile leadership framework encompasses 14 core skills organized into individual, team, and task-focused competencies that drive effective leadership.',
+                    skillCategories: [
+                        'Individual Skills: Understanding people, support & feedback, objective setting',
+                        'Team Skills: Team vision, collaboration, learning support, thriving environment',
+                        'Task Skills: Leading change, managing projects, decision making',
+                        'Core Leadership Approaches: Mentor, Coach, Direct, Delegate'
+                    ],
+                    development: [
+                        'Each skill builds on proven leadership theories and practices',
+                        'Skills are interconnected and reinforce each other',
+                        'Framework adapts to different leadership contexts and challenges',
+                        'Regular assessment helps identify development priorities',
+                        'Practical application accelerates skill development'
+                    ],
+                    actionUrl: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1',
+                    actionText: 'Take Skills Assessment'
                 }
             }
         };
@@ -741,28 +770,41 @@
             if (skill) {
                 currentSkill = skillKey;
                 isDetailView = false;
+                currentDetailSection = null;
                 
                 document.getElementById('modalTitle').textContent = skill.title;
                 document.getElementById('modalDescription').textContent = skill.description;
-                document.getElementById('learningBtn').href = skill.learningUrl;
                 
-                // Set up detailed content
-                const detailedContent = document.getElementById('detailedContent');
-                if (skill.details) {
-                    detailedContent.innerHTML = `
-                        <h3>Overview</h3>
-                        <p>${skill.details.overview}</p>
-                        
-                        <h3>Key Behaviors</h3>
-                        <ul>
-                            ${skill.details.keyBehaviors.map(behavior => `<li>${behavior}</li>`).join('')}
-                        </ul>
-                        
-                        <h3>Development Areas</h3>
-                        <ul>
-                            ${skill.details.developmentAreas.map(area => `<li>${area}</li>`).join('')}
-                        </ul>
-                    `;
+                // Check if this is a dual-expandable modal
+                if (skill.isDualExpandable) {
+                    document.getElementById('actionButtons').style.display = 'none';
+                    document.getElementById('dualActionButtons').style.display = 'grid';
+                    
+                    // Set up content for both sections
+                    setupDualExpandableContent(skill);
+                } else {
+                    document.getElementById('actionButtons').style.display = 'grid';
+                    document.getElementById('dualActionButtons').style.display = 'none';
+                    document.getElementById('learningBtn').href = skill.learningUrl;
+                    
+                    // Set up single detailed content
+                    const detailedContent = document.getElementById('detailedContent');
+                    if (skill.details) {
+                        detailedContent.innerHTML = `
+                            <h3>Overview</h3>
+                            <p>${skill.details.overview}</p>
+                            
+                            <h3>Key Behaviors</h3>
+                            <ul>
+                                ${skill.details.keyBehaviors.map(behavior => `<li>${behavior}</li>`).join('')}
+                            </ul>
+                            
+                            <h3>Development Areas</h3>
+                            <ul>
+                                ${skill.details.developmentAreas.map(area => `<li>${area}</li>`).join('')}
+                            </ul>
+                        `;
+                    }
                 }
                 
                 // Reset to overview mode
@@ -772,6 +814,51 @@
             }
         }
 
+        function setupDualExpandableContent(skill) {
+            const detailedContent = document.getElementById('detailedContent');
+            detailedContent.innerHTML = `
+                <div id="leftSectionContent" style="display: none;">
+                    <h3>Overview</h3>
+                    <p>${skill.leftSection.overview}</p>
+                    
+                    <h3>Key Areas</h3>
+                    <ul>
+                        ${skill.leftSection.keyAreas.map(area => `<li>${area}</li>`).join('')}
+                    </ul>
+                    
+                    <h3>Available Resources</h3>
+                    <ul>
+                        ${skill.leftSection.resources.map(resource => `<li>${resource}</li>`).join('')}
+                    </ul>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>
+                        <a href="${skill.leftSection.actionUrl}" class="action-btn" target="_blank">${skill.leftSection.actionText}</a>
+                    </div>
+                </div>
+                
+                <div id="rightSectionContent" style="display: none;">
+                    <h3>Overview</h3>
+                    <p>${skill.rightSection.overview}</p>
+                    
+                    <h3>Skill Categories</h3>
+                    <ul>
+                        ${skill.rightSection.skillCategories.map(category => `<li>${category}</li>`).join('')}
+                    </ul>
+                    
+                    <h3>Development Approach</h3>
+                    <ul>
+                        ${skill.rightSection.development.map(point => `<li>${point}</li>`).join('')}
+                    </ul>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>
+                        <a href="${skill.rightSection.actionUrl}" class="action-btn" target="_blank">${skill.rightSection.actionText}</a>
+                    </div>
+                </div>
+            `;
+        }
+
         function closeModal() {
             document.getElementById('modal').classList.remove('show');
             document.body.style.overflow = 'auto';
@@ -779,20 +866,58 @@
             currentSkill = null;
         }
 
-        function toggleDetailView() {
-            if (isDetailView) {
-                showOverview();
+        function toggleDetailView(section = null) {
+            const skill = skills[currentSkill];
+            
+            if (skill && skill.isDualExpandable) {
+                // Handle dual-expandable modals
+                if (section === 'left') {
+                    showDualDetail('leftSectionContent');
+                    currentDetailSection = 'left';
+                } else if (section === 'right') {
+                    showDualDetail('rightSectionContent');
+                    currentDetailSection = 'right';
+                }
             } else {
-                showDetails();
+                // Handle single-expandable modals
+                if (isDetailView) {
+                    showOverview();
+                } else {
+                    showDetails();
+                }
             }
+        }
+
+        function showDualDetail(sectionId) {
+            isDetailView = true;
+            document.getElementById('modalDescription').style.display = 'none';
+            document.getElementById('dualActionButtons').style.display = 'none';
+            
+            // Hide both sections first
+            document.getElementById('leftSectionContent').style.display = 'none';
+            document.getElementById('rightSectionContent').style.display = 'none';
+            
+            // Show the requested section
+            document.getElementById(sectionId).style.display = 'block';
+            document.getElementById('detailedContent').classList.add('show');
         }
 
         function showOverview() {
             isDetailView = false;
+            currentDetailSection = null;
             document.getElementById('modalDescription').style.display = 'block';
             document.getElementById('detailedContent').classList.remove('show');
-            document.getElementById('toggleBtn').textContent = 'Find Out More';
-            document.getElementById('toggleBtn').classList.add('secondary');
+            
+            const skill = skills[currentSkill];
+            if (skill && skill.isDualExpandable) {
+                document.getElementById('dualActionButtons').style.display = 'grid';
+                document.getElementById('actionButtons').style.display = 'none';
+            } else {
+                document.getElementById('actionButtons').style.display = 'grid';
+                document.getElementById('dualActionButtons').style.display = 'none';
+                document.getElementById('toggleBtn').textContent = 'Find Out More';
+                document.getElementById('toggleBtn').classList.add('secondary');
+            }
         }
 
         function showDetails() {

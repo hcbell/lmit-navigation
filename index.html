@@ -395,14 +395,14 @@
             <div class="detailed-content" id="detailedContent"></div>
             
             <div class="action-buttons" id="actionButtons">
-                <button class="action-btn secondary" id="toggleBtn" onclick="toggleDetailView()">Understand the Skills</button>
-                <a href="#" class="action-btn" id="learningBtn" target="_blank">Support, Resources and Experiences</a>
+                <button class="action-btn secondary" id="toggleBtn" onclick="toggleDetailView()">Find Out More</button>
+                <a href="#" class="action-btn" id="learningBtn" target="_blank">Start Learning</a>
             </div>
             
             <!-- Special dual-expandable buttons for certain modals -->
             <div class="action-buttons" id="dualActionButtons" style="display: none;">
-                <button class="action-btn secondary" id="leftExpandBtn" onclick="toggleDetailView('left')">Understand the Skills</button>
-                <button class="action-btn secondary" id="rightExpandBtn" onclick="toggleDetailView('right')">Support, Resources and Experiences</button>
+                <button class="action-btn secondary" id="leftExpandBtn" onclick="toggleDetailView('left')">Support, Resources and Experiences</button>
+                <button class="action-btn secondary" id="rightExpandBtn" onclick="toggleDetailView('right')">Understand the Skills</button>
             </div>
         </div>
     </div>
@@ -415,14 +415,23 @@
         const skills = {
             understanding_individuals: {
                 title: '👤 Understanding Individuals',
-                description: 'Develop skills to understand individual\'s  motivations, strengths, interests and personal values to lead each person effectively.',
+                description: 'Develop skills to understand individual motivations, strengths, interests and personal values to lead each person effectively.',
                 learningUrl: 'https://thelearningarena.streamlxp.com/courses/understanding-individuals/home',
                 details: {
-                    overview: 'This skill is about understanding each team member\'s s needs in order to motivate individuals by aligning tasks and development opportunities with their interests, personal goals, needs, and values.',
+                    overview: 'Understanding individuals is about recognizing that each team member brings unique motivations, strengths, and working styles to the team.',
                     keyBehaviors: [
-                        'Using coaching and mentoring to support individuals to take ownership of their goals and development',
-                        'Assessing individual team members\' needs, values, and goals',
-                        'Developing motivation strategies tailored to individual team members\' drivers'
+                        'Actively listen to understand individual perspectives and concerns',
+                        'Identify and leverage each person\'s unique strengths and talents',
+                        'Adapt communication style to suit different personality types',
+                        'Recognize individual motivators and career aspirations',
+                        'Show genuine interest in team members as whole people'
+                    ],
+                    developmentAreas: [
+                        'Emotional intelligence and empathy',
+                        'Active listening techniques',
+                        'Personality assessment tools (DISC, Myers-Briggs, etc.)',
+                        'One-on-one conversation skills',
+                        'Cultural awareness and sensitivity'
                     ]
                 }
             },
@@ -908,7 +917,7 @@
             } else {
                 document.getElementById('actionButtons').style.display = 'grid';
                 document.getElementById('dualActionButtons').style.display = 'none';
-                document.getElementById('toggleBtn').textContent = 'Understand the Skills';
+                document.getElementById('toggleBtn').textContent = 'Find Out More';
                 document.getElementById('toggleBtn').classList.add('secondary');
             }
         }
@@ -933,4 +942,3 @@
     </script>
 </body>
 </html>
-

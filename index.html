@@ -782,20 +782,20 @@
                     
                     // Set up single detailed content
                     const detailedContent = document.getElementById('detailedContent');
-                    if (skill.details) {
-                        detailedContent.innerHTML = `
+if (skill.details) {
+    detailedContent.innerHTML = `
         <h3>Overview</h3>
         <p>${skill.details.overview}</p>
         
         <h3>Key Behaviors</h3>
         <ul>
-            ${skill.details.keyBehaviors.map(behavior => `<li>${behavior}</li>`).join('')}
+            ${skill.details.keyBehaviors.map(behavior => '<li>' + behavior + '</li>').join('')}
         </ul>
         
         ${skill.details.developmentAreas ? `
             <h3>Development Areas</h3>
             <ul>
-                ${skill.details.developmentAreas.map(area => `<li>${area}</li>`).join('')}
+                ${skill.details.developmentAreas.map(area => '<li>' + area + '</li>').join('')}
             </ul>
         ` : ''}
     `;

@@ -415,10 +415,10 @@
         const skills = {
             understanding_individuals: {
                 title: '👤 Understanding Individuals',
-                description: 'Develop skills to understand individual\'s motivations, strengths, interests and personal values to lead each person effectively.',
+                description: 'Develop skills to understand individual\'s  motivations, strengths, interests and personal values to lead each person effectively.',
                 learningUrl: 'https://thelearningarena.streamlxp.com/courses/understanding-individuals/home',
                 details: {
-                    overview: 'This skill is about understanding each team member\'s needs in order to motivate individuals by aligning tasks and development opportunities with their interests, personal goals, needs, and values.',
+                    overview: 'This skill is about understanding each team member\'s s needs in order to motivate individuals by aligning tasks and development opportunities with their interests, personal goals, needs, and values.',
                     keyBehaviors: [
                         'Using coaching and mentoring to support individuals to take ownership of their goals and development',
                         'Assessing individual team members\' needs, values, and goals',
@@ -743,3 +743,194 @@
                         'Individual Skills: Understanding people, support & feedback, objective setting',
                         'Team Skills: Team vision, collaboration, learning support, thriving environment',
                         'Task Skills: Leading change, managing projects, decision making',
+                        'Core Leadership Approaches: Mentor, Coach, Direct, Delegate'
+                    ],
+                    development: [
+                        'Each skill builds on proven leadership theories and practices',
+                        'Skills are interconnected and reinforce each other',
+                        'Framework adapts to different leadership contexts and challenges',
+                        'Regular assessment helps identify development priorities',
+                        'Practical application accelerates skill development'
+                    ],
+                    actionUrl: 'https://app.smartsheet.com/b/form/e349886279db4b53ae3f30950955a7e1',
+                    actionText: 'Take Skills Assessment'
+                }
+            }
+        };
+
+        function openModal(skillKey) {
+            const skill = skills[skillKey];
+            if (skill) {
+                currentSkill = skillKey;
+                isDetailView = false;
+                currentDetailSection = null;
+                
+                document.getElementById('modalTitle').textContent = skill.title;
+                document.getElementById('modalDescription').textContent = skill.description;
+                
+                // Check if this is a dual-expandable modal
+                if (skill.isDualExpandable) {
+                    document.getElementById('actionButtons').style.display = 'none';
+                    document.getElementById('dualActionButtons').style.display = 'grid';
+                    
+                    // Set up content for both sections
+                    setupDualExpandableContent(skill);
+                } else {
+                    document.getElementById('actionButtons').style.display = 'grid';
+                    document.getElementById('dualActionButtons').style.display = 'none';
+                    document.getElementById('learningBtn').href = skill.learningUrl;
+                    
+                    // Set up single detailed content
+                    const detailedContent = document.getElementById('detailedContent');
+                    if (skill.details) {
+                        detailedContent.innerHTML = `
+                            <h3>Overview</h3>
+                            <p>${skill.details.overview}</p>
+                            
+                            <h3>Key Behaviors</h3>
+                            <ul>
+                                ${skill.details.keyBehaviors.map(behavior => `<li>${behavior}</li>`).join('')}
+                            </ul>
+                            
+                            <h3>Development Areas</h3>
+                            <ul>
+                                ${skill.details.developmentAreas.map(area => `<li>${area}</li>`).join('')}
+                            </ul>
+                        `;
+                    }
+                }
+                
+                // Reset to overview mode
+                showOverview();
+                document.getElementById('modal').classList.add('show');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function setupDualExpandableContent(skill) {
+            const detailedContent = document.getElementById('detailedContent');
+            detailedContent.innerHTML = `
+                <div id="leftSectionContent" style="display: none;">
+                    <h3>Overview</h3>
+                    <p>${skill.leftSection.overview}</p>
+                    
+                    <h3>Key Areas</h3>
+                    <ul>
+                        ${skill.leftSection.keyAreas.map(area => `<li>${area}</li>`).join('')}
+                    </ul>
+                    
+                    <h3>Available Resources</h3>
+                    <ul>
+                        ${skill.leftSection.resources.map(resource => `<li>${resource}</li>`).join('')}
+                    </ul>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>
+                        <a href="${skill.leftSection.actionUrl}" class="action-btn" target="_blank">${skill.leftSection.actionText}</a>
+                    </div>
+                </div>
+                
+                <div id="rightSectionContent" style="display: none;">
+                    <h3>Overview</h3>
+                    <p>${skill.rightSection.overview}</p>
+                    
+                    <h3>Skill Categories</h3>
+                    <ul>
+                        ${skill.rightSection.skillCategories.map(category => `<li>${category}</li>`).join('')}
+                    </ul>
+                    
+                    <h3>Development Approach</h3>
+                    <ul>
+                        ${skill.rightSection.development.map(point => `<li>${point}</li>`).join('')}
+                    </ul>
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>
+                        <a href="${skill.rightSection.actionUrl}" class="action-btn" target="_blank">${skill.rightSection.actionText}</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        function closeModal() {
+            document.getElementById('modal').classList.remove('show');
+            document.body.style.overflow = 'auto';
+            isDetailView = false;
+            currentSkill = null;
+        }
+
+        function toggleDetailView(section = null) {
+            const skill = skills[currentSkill];
+            
+            if (skill && skill.isDualExpandable) {
+                // Handle dual-expandable modals
+                if (section === 'left') {
+                    showDualDetail('leftSectionContent');
+                    currentDetailSection = 'left';
+                } else if (section === 'right') {
+                    showDualDetail('rightSectionContent');
+                    currentDetailSection = 'right';
+                }
+            } else {
+                // Handle single-expandable modals
+                if (isDetailView) {
+                    showOverview();
+                } else {
+                    showDetails();
+                }
+            }
+        }
+
+        function showDualDetail(sectionId) {
+            isDetailView = true;
+            document.getElementById('modalDescription').style.display = 'none';
+            document.getElementById('dualActionButtons').style.display = 'none';
+            
+            // Hide both sections first
+            document.getElementById('leftSectionContent').style.display = 'none';
+            document.getElementById('rightSectionContent').style.display = 'none';
+            
+            // Show the requested section
+            document.getElementById(sectionId).style.display = 'block';
+            document.getElementById('detailedContent').classList.add('show');
+        }
+
+        function showOverview() {
+            isDetailView = false;
+            currentDetailSection = null;
+            document.getElementById('modalDescription').style.display = 'block';
+            document.getElementById('detailedContent').classList.remove('show');
+            
+            const skill = skills[currentSkill];
+            if (skill && skill.isDualExpandable) {
+                document.getElementById('dualActionButtons').style.display = 'grid';
+                document.getElementById('actionButtons').style.display = 'none';
+            } else {
+                document.getElementById('actionButtons').style.display = 'grid';
+                document.getElementById('dualActionButtons').style.display = 'none';
+                document.getElementById('toggleBtn').textContent = 'Understand the Skills';
+                document.getElementById('toggleBtn').classList.add('secondary');
+            }
+        }
+
+        function showDetails() {
+            isDetailView = true;
+            document.getElementById('modalDescription').style.display = 'none';
+            document.getElementById('detailedContent').classList.add('show');
+            document.getElementById('toggleBtn').textContent = 'See Less';
+            document.getElementById('toggleBtn').classList.remove('secondary');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+    </script>
+</body>
+</html>
+

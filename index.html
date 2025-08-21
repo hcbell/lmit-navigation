@@ -785,27 +785,19 @@
                 } else {
                     document.getElementById('actionButtons').style.display = 'grid';
                     document.getElementById('dualActionButtons').style.display = 'none';
-                    document.getElementById('learningBtn').href = skill.learningUrl;
-                    
-                    // Set up single detailed content
+                    document.getElementById('learningBtn').href = skill.learningUrl;            
                     const detailedContent = document.getElementById('detailedContent');
                     if (skill.details) {
                         detailedContent.innerHTML = `
-                            <h3>Overview</h3>
-                            <p>${skill.details.overview}</p>
-                            
-                            <h3>Key Behaviors</h3>
+                        <h3>Overview</h3>
+                        <p>${skill.details.overview}</p>
+        
+                        <h3>Key Behaviors</h3>
                             <ul>
-                                ${skill.details.keyBehaviors.map(behavior => `<li>${behavior}</li>`).join('')}
-                            </ul>
-                            
-                            <h3>Development Areas</h3>
-                            <ul>
-                                ${skill.details.developmentAreas.map(area => `<li>${area}</li>`).join('')}
-                            </ul>
-                        `;
-                    }
-                }
+                        ${skill.details.keyBehaviors.map(behavior => `<li>${behavior}</li>`).join('')}
+                    </ul>
+            `;
+        }
                 
                 // Reset to overview mode
                 showOverview();

@@ -423,13 +423,6 @@
                         'Use coaching and mentoring to support individuals to take ownership of their goals and development',
                         'Assess the needs, values, and goals of individual team members',
                         'Develop motivation strategies tailored to the drivers of individual team members'
-                    ],
-                    developmentAreas: [
-                        'Emotional intelligence and empathy',
-                        'Active listening techniques',
-                        'Personality assessment tools (DISC, Myers-Briggs, etc.)',
-                        'One-on-one conversation skills',
-                        'Cultural awareness and sensitivity'
                     ]
                 }
             },
@@ -445,13 +438,6 @@
                         'Regularly communicate progress toward vision',
                         'Involve team members in vision development',
                         'Adapt vision communication for different audiences'
-                    ],
-                    developmentAreas: [
-                        'Strategic thinking and planning',
-                        'Storytelling and narrative creation',
-                        'Presentation and communication skills',
-                        'Goal-setting frameworks (OKRs, SMART goals)',
-                        'Change communication strategies'
                     ]
                 }
             },
@@ -467,13 +453,6 @@
                         'Model collaborative behavior in all interactions',
                         'Break down silos between team members or departments',
                         'Create opportunities for team bonding and relationship building'
-                    ],
-                    developmentAreas: [
-                        'Facilitation and meeting management',
-                        'Conflict resolution and mediation',
-                        'Team dynamics and group psychology',
-                        'Virtual collaboration tools and techniques',
-                        'Cross-functional project management'
                     ]
                 }
             },
@@ -489,13 +468,6 @@
                         'Break down change into manageable steps',
                         'Celebrate early wins and progress milestones',
                         'Provide support and resources during transitions'
-                    ],
-                    developmentAreas: [
-                        'Change management frameworks (Kotter, ADKAR)',
-                        'Stakeholder analysis and engagement',
-                        'Resistance management techniques',
-                        'Communication planning and execution',
-                        'Organizational psychology and behavior'
                     ]
                 }
             },
@@ -511,13 +483,6 @@
                         'Create psychological safety for open dialogue',
                         'Offer emotional support during challenging times',
                         'Follow up on feedback to ensure understanding and progress'
-                    ],
-                    developmentAreas: [
-                        'Feedback models (SBI, GROW, etc.)',
-                        'Difficult conversation techniques',
-                        'Active listening and questioning skills',
-                        'Emotional intelligence and self-awareness',
-                        'Performance coaching methodologies'
                     ]
                 }
             },
@@ -533,13 +498,6 @@
                         'Involve team members in goal-setting process',
                         'Regularly review and adjust objectives as needed',
                         'Track progress and provide regular updates'
-                    ],
-                    developmentAreas: [
-                        'Goal-setting frameworks and methodologies',
-                        'Strategic alignment and cascading',
-                        'Performance measurement and KPIs',
-                        'Project planning and milestone tracking',
-                        'Agile and iterative planning approaches'
                     ]
                 }
             },
@@ -555,13 +513,6 @@
                         'Provide learning opportunities and resources',
                         'Encourage experimentation and learning from failure',
                         'Share knowledge and facilitate peer learning'
-                    ],
-                    developmentAreas: [
-                        'Learning and development planning',
-                        'Adult learning principles and methodologies',
-                        'Mentoring and coaching techniques',
-                        'Knowledge management systems',
-                        'Training design and delivery'
                     ]
                 }
             },
@@ -577,13 +528,6 @@
                         'Monitor progress and adjust plans as needed',
                         'Manage risks and dependencies proactively',
                         'Ensure quality standards are met throughout delivery'
-                    ],
-                    developmentAreas: [
-                        'Project management methodologies (Agile, Waterfall, Hybrid)',
-                        'Resource planning and allocation',
-                        'Risk management and mitigation',
-                        'Quality assurance and control',
-                        'Stakeholder management and communication'
                     ]
                 }
             },
@@ -599,13 +543,6 @@
                         'Promote work-life balance and wellbeing',
                         'Encourage diversity of thought and perspective',
                         'Address toxic behaviors and maintain team standards'
-                    ],
-                    developmentAreas: [
-                        'Psychological safety and trust building',
-                        'Recognition and reward systems',
-                        'Diversity, equity, and inclusion practices',
-                        'Team culture and values development',
-                        'Conflict resolution and team dynamics'
                     ]
                 }
             },
@@ -621,13 +558,6 @@
                         'Make timely decisions even with incomplete information',
                         'Communicate decisions clearly with rationale',
                         'Take responsibility for decision outcomes'
-                    ],
-                    developmentAreas: [
-                        'Decision-making frameworks and models',
-                        'Data analysis and interpretation',
-                        'Risk assessment and management',
-                        'Stakeholder consultation techniques',
-                        'Critical thinking and problem-solving'
                     ]
                 }
             },
@@ -643,13 +573,6 @@
                         'Offer perspective on industry trends and opportunities',
                         'Support long-term growth and capability building',
                         'Create networking and development opportunities'
-                    ],
-                    developmentAreas: [
-                        'Mentoring relationship building',
-                        'Career development planning',
-                        'Industry knowledge and expertise',
-                        'Networking and relationship management',
-                        'Wisdom sharing and storytelling'
                     ]
                 }
             },
@@ -665,13 +588,6 @@
                         'Set clear expectations and deadlines',
                         'Allow autonomy in approach and execution',
                         'Monitor progress without micromanaging'
-                    ],
-                    developmentAreas: [
-                        'Task analysis and assignment',
-                        'Authority and responsibility frameworks',
-                        'Performance monitoring systems',
-                        'Trust building and empowerment',
-                        'Accountability and follow-up processes'
                     ]
                 }
             },
@@ -687,13 +603,6 @@
                         'Monitor performance closely and provide immediate feedback',
                         'Make decisions quickly and communicate them clearly',
                         'Provide structure and process when needed'
-                    ],
-                    developmentAreas: [
-                        'Command and control techniques',
-                        'Process design and documentation',
-                        'Performance monitoring and correction',
-                        'Clear communication and instruction',
-                        'Situational leadership assessment'
                     ]
                 }
             },
@@ -709,13 +618,6 @@
                         'Help others set meaningful goals and action plans',
                         'Provide support and encouragement during challenges',
                         'Facilitate self-discovery and learning'
-                    ],
-                    developmentAreas: [
-                        'Coaching models and frameworks (GROW, CLEAR)',
-                        'Powerful questioning techniques',
-                        'Active listening and reflection skills',
-                        'Goal setting and action planning',
-                        'Behavioral change and motivation'
                     ]
                 }
             },
@@ -785,18 +687,22 @@
                 } else {
                     document.getElementById('actionButtons').style.display = 'grid';
                     document.getElementById('dualActionButtons').style.display = 'none';
-                    document.getElementById('learningBtn').href = skill.learningUrl;            
+                    document.getElementById('learningBtn').href = skill.learningUrl;
+                    
+                    // Set up single detailed content
                     const detailedContent = document.getElementById('detailedContent');
                     if (skill.details) {
                         detailedContent.innerHTML = `
-                        <h3>Overview</h3>
-                        <p>${skill.details.overview}</p>    
-                        <h3>Key Behaviors</h3>
+                            <h3>Overview</h3>
+                            <p>${skill.details.overview}</p>
+                            
+                            <h3>Key Behaviors</h3>
                             <ul>
-                       ${skill.details.keyBehaviors.map(behavior => '<li>' + behavior + '</li>').join('')}
-                    </ul>
-            `;
-        }
+                                ${skill.details.keyBehaviors.map(behavior => '<li>' + behavior + '</li>').join('')}
+                            </ul>
+                        `;
+                    }
+                }
                 
                 // Reset to overview mode
                 showOverview();
@@ -814,12 +720,12 @@
                     
                     <h3>Key Areas</h3>
                     <ul>
-                        ${skill.leftSection.keyAreas.map(area => `<li>${area}</li>`).join('')}
+                        ${skill.leftSection.keyAreas.map(area => '<li>' + area + '</li>').join('')}
                     </ul>
                     
                     <h3>Available Resources</h3>
                     <ul>
-                        ${skill.leftSection.resources.map(resource => `<li>${resource}</li>`).join('')}
+                        ${skill.leftSection.resources.map(resource => '<li>' + resource + '</li>').join('')}
                     </ul>
                     
                     <div style="margin-top: 20px;">
@@ -834,12 +740,12 @@
                     
                     <h3>Skill Categories</h3>
                     <ul>
-                        ${skill.rightSection.skillCategories.map(category => `<li>${category}</li>`).join('')}
+                        ${skill.rightSection.skillCategories.map(category => '<li>' + category + '</li>').join('')}
                     </ul>
                     
                     <h3>Development Approach</h3>
                     <ul>
-                        ${skill.rightSection.development.map(point => `<li>${point}</li>`).join('')}
+                        ${skill.rightSection.development.map(point => '<li>' + point + '</li>').join('')}
                     </ul>
                     
                     <div style="margin-top: 20px;">

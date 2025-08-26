@@ -738,15 +738,11 @@
                     <h3>Overview</h3>
                     <p>${skill.rightSection.overview}</p>
                     
-                    <h3>Skill Categories</h3>
-                    <ul>
-                        ${skill.rightSection.skillCategories.map(category => '<li>' + category + '</li>').join('')}
-                    </ul>
-                    
-                    <h3>Development Approach</h3>
-                    <ul>
-                        ${skill.rightSection.development.map(point => '<li>' + point + '</li>').join('')}
-                    </ul>
+                 <h3>Skill Categories</h3>
+                    <p>${skill.rightSection.skillCategories.join('. ') + '.'}</p>
+
+                <h3>Development Approach</h3>
+                    <p>${skill.rightSection.development.join('. ') + '.'}</p>
                     
                     <div style="margin-top: 20px;">
                         <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>

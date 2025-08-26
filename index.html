@@ -623,11 +623,11 @@
             },
             assessment: {
                 title: '📊 Agile Leadership',
-                description: 'Discover the agile leadership framework, explore support resources, and understand the core skills that drive effective leadership in today\'s dynamic environment.',
+                description: 'Our Agile Leadership framework was built specifically for leaders in High Performance Sport to understand and develop the skills needed for effective leadership in our unique and dynamic environment.',
                 isDualExpandable: true,
                 leftSection: {
                     title: 'Support, Resources and Experiences',
-                    overview: 'Access comprehensive support, learning resources, and development experiences designed to accelerate your agile leadership journey.',
+                    overview: 'Our Agile Leadership framework was built specifically for leaders in High Performance Sport to understand and develop the skills needed for effective leadership in our unique and dynamic environment.',
                     keyAreas: [
                         'Personalized learning pathways and development plans',
                         'Expert coaching and mentoring opportunities',
@@ -718,15 +718,15 @@
                     <h3>Overview</h3>
                     <p>${skill.leftSection.overview}</p>
                     
-                    <h3>Key Areas</h3>
-                    <ul>
-                        ${skill.leftSection.keyAreas.map(area => '<li>' + area + '</li>').join('')}
-                    </ul>
+                     <h3>Overview</h3>
+                    <p>${skill.rightSection.overview}</p>
                     
-                    <h3>Available Resources</h3>
-                    <ul>
-                        ${skill.leftSection.resources.map(resource => '<li>' + resource + '</li>').join('')}
-                    </ul>
+                 <h3>Skill Categories</h3>
+                    <p>${skill.rightSection.skillCategories.join('. ') + '.'}</p>
+
+                <h3>Development Approach</h3>
+                    <p>${skill.rightSection.development.join('. ') + '.'}</p>
+                    
                     
                     <div style="margin-top: 20px;">
                         <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>
@@ -735,14 +735,15 @@
                 </div>
                 
                 <div id="rightSectionContent" style="display: none;">
-                    <h3>Overview</h3>
-                    <p>${skill.rightSection.overview}</p>
+                   <h3>Key Areas</h3>
+                    <ul>
+                        ${skill.leftSection.keyAreas.map(area => '<li>' + area + '</li>').join('')}
+                    </ul>
                     
-                 <h3>Skill Categories</h3>
-                    <p>${skill.rightSection.skillCategories.join('. ') + '.'}</p>
-
-                <h3>Development Approach</h3>
-                    <p>${skill.rightSection.development.join('. ') + '.'}</p>
+                    <h3>Available Resources</h3>
+                    <ul>
+                        ${skill.leftSection.resources.map(resource => '<li>' + resource + '</li>').join('')}
+                    </ul>
                     
                     <div style="margin-top: 20px;">
                         <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>

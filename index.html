@@ -6,7 +6,7 @@
     <title>Leading Others with Agile Leadership Skills</title>
     <!-- Google tag (gtag.js) --> 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-8SWHJZCMCR"></script> 
-<script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-8SWHJZCMCR'); 
+<script>   window.dataLayer = window.dataLayer || [];   function gtag(){dataLayer.push(arguments);}   gtag('js', new Date());   gtag('config', 'G-8SWHJZCMCR'); 
 </script>
     <style>
         body {
@@ -95,10 +95,6 @@
             opacity: 1;
         }
         
-        .assessment:hover {
-            transform: translateX(-50%) translateY(-3px) scale(1.05);
-        }
-        
         /* Button positioning */
         .understanding-individuals { top: 18%; left: 2%; }
         .team-vision { top: 32%; left: 2%; }
@@ -117,7 +113,8 @@
         .direct { top: 69%; left: 22%; }
         .coach { top: 69%; right: 22%; }
         
-        .assessment { bottom: 87%; left: 50%; transform: translateX(-50%); }
+        .overview { top: 5%; left: 30%; }
+        .assessment { top: 5%; right: 30%; }
         
         .modal {
             display: none;
@@ -375,11 +372,17 @@
                  alt="Coach" 
                  onerror="this.style.display='none';" />
             
-            <!-- Assessment button image -->
+            <!-- Overview and Assessment button images -->
+            <img src="overview-btn.png" 
+                 class="skill-button-image overview" 
+                 onclick="window.open('assessment')" 
+                 alt="Agile Leadership Overview" 
+                 onerror="this.style.display='none';" />
+            
             <img src="assessment-btn.png" 
                  class="skill-button-image assessment" 
-                 onclick="openModal('assessment')" 
-                 alt="Agile Leadership" 
+                 onclick="openModal('https://thelearningarena.streamlxp.com/courses/introduction-to-leading-others/home', '_blank')" 
+                 alt="Agile Leadership Assessment" 
                  onerror="this.style.display='none';" />
         </div>
     </div>

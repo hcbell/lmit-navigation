@@ -407,9 +407,8 @@
             </div>
             
             <!-- Special dual-expandable buttons for certain modals -->
-            <div class="action-buttons" id="dualActionButtons" style="display: none;">
+            <div class="action-buttons" id="dualActionButtons" style="display: none; grid-template-columns: 1fr;">
                 <button class="action-btn secondary" id="leftExpandBtn" onclick="toggleDetailView('left')">Support, Resources and Experiences</button>
-                <button class="action-btn secondary" id="rightExpandBtn" onclick="toggleDetailView('right')" style="display: none;">Understand the Skills</button>
             </div>
         </div>
     </div>
@@ -697,44 +696,17 @@
 
         function setupDualExpandableContent(skill) {
             const detailedContent = document.getElementById('detailedContent');
-            let html = '';
             
-            // Only add left section if it exists
-            if (skill.leftSection) {
-                html += `
-                    <div id="leftSectionContent" style="display: none;">
-                        ${skill.leftSection.content}
-                        
-                        <div style="margin-top: 20px;">
-                            <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>
-                            <a href="${skill.leftSection.actionUrl}" class="action-btn" target="_blank">${skill.leftSection.actionText}</a>
-                        </div>
+            detailedContent.innerHTML = `
+                <div id="leftSectionContent" style="display: none;">
+                    ${skill.leftSection.content}
+                    
+                    <div style="margin-top: 20px;">
+                        <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>
+                        <a href="${skill.leftSection.actionUrl}" class="action-btn" target="_blank">${skill.leftSection.actionText}</a>
                     </div>
-                `;
-            }
-            
-            // Only add right section if it exists
-            if (skill.rightSection) {
-                html += `
-                    <div id="rightSectionContent" style="display: none;">
-                        ${skill.rightSection.content}
-                        
-                        <div style="margin-top: 20px;">
-                            <button class="action-btn secondary" onclick="showOverview()" style="margin-right: 10px;">See Less</button>
-                            <a href="${skill.rightSection.actionUrl}" class="action-btn" target="_blank">${skill.rightSection.actionText}</a>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            detailedContent.innerHTML = html;
-            
-            // Update the dual action buttons to only show buttons for sections that exist
-            const leftBtn = document.getElementById('leftExpandBtn');
-            const rightBtn = document.getElementById('rightExpandBtn');
-            
-            if (leftBtn) leftBtn.style.display = skill.leftSection ? 'block' : 'none';
-            if (rightBtn) rightBtn.style.display = skill.rightSection ? 'block' : 'none';
+                </div>
+            `;
         }
 
         function closeModal() {
@@ -771,12 +743,11 @@
             document.getElementById('modalDescription').style.display = 'none';
             document.getElementById('dualActionButtons').style.display = 'none';
             
-            // Hide both sections first
-            document.getElementById('leftSectionContent').style.display = 'none';
-            document.getElementById('rightSectionContent').style.display = 'none';
-            
             // Show the requested section
-            document.getElementById(sectionId).style.display = 'block';
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.style.display = 'block';
+            }
             document.getElementById('detailedContent').classList.add('show');
         }
 
